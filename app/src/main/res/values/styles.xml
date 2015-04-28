@@ -1,0 +1,56 @@
+<resources>
+
+    <color name="background">#fffefefe</color>
+    <color name="text">#2D3E50</color>
+    <color name="highlight">#1BBC9B</color>
+    <color name="highlight_dark">#18A98C</color>
+    <color name="success">#1BBC9B</color>
+    <color name="error">#E64C66</color>
+    <color name="warning">#FFD069</color>
+    <color name="gray_light">#E3E3E3</color>
+    <color name="gray">#AEAEAE</color>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:background">@color/background</item>
+        <item name="colorPrimary">@color/highlight</item>
+        <item name="colorPrimaryDark">@color/highlight_dark</item>
+        <item name="colorAccent">@color/highlight_dark</item>
+    </style>
+
+    <style name="WaitDialog" parent="android:style/Theme.Dialog">
+        <item name="colorPrimary">@color/warning</item>
+        <item name="colorPrimaryDark">@color/warning</item>
+        <item name="colorAccent">@color/warning</item>
+        <item name="android:background">#99000000</item>
+    </style>
+
+    <style name="RideShareEditText">
+
+    </style>
+
+    <style name="RideShareText">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+
+    <style name="RideShareTextError" parent="RideShareText">
+        <item name="android:textColor">@color/error</item>
+    </style>
+
+    <style name="WaitMsgText" parent="RideShareText">
+        <item name="android:textColor">@color/background</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="RideShareButton">
+        <item name="android:background">@drawable/button</item>
+        <item name="android:textColor">@color/background</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
+
+    <style name="RideShareFlatButton" parent="RideShareButton">
+        <item name="android:background">@drawable/button_transparent</item>
+        <item name="android:textColor">@color/highlight</item>
+    </style>
+
+</resources>
