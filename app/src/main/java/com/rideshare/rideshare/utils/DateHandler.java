@@ -5,9 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * Created by Alex on 5/2/2015.
- */
 public class DateHandler{
 
     public DateHandler(){
@@ -33,7 +30,6 @@ public class DateHandler{
         format.setTimeZone(TimeZone.getTimeZone("GMT+3"));
         String formatted = format.format(new Date(epochDate));
         return formatted;
-
     }
 
     public String fromEpochToIsoTimeZone0(long epochDate) throws ParseException{
@@ -42,7 +38,6 @@ public class DateHandler{
         format.setTimeZone(TimeZone.getTimeZone("GMT"));
         String formatted = format.format(new Date(epochDate));
         return formatted;
-
     }
 
     public String timeDifference(String iso1, String iso2) throws ParseException{
