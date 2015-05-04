@@ -21,7 +21,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.rengwuxian.materialedittext:library:1.8.3'
     compile 'com.github.navasmdc:MaterialDesign:1.4'
     compile 'com.hannesdorfmann.smoothprogressbar:library:1.0.0'

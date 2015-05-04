@@ -99,6 +99,7 @@ tools:context="com.rideshare.rideshare.view.activity.SignUpActivity" >
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:text="@string/singUp"
+        android:onClick="registration"
         style="@style/RideShareButton"/>
 </LinearLayout>
 </ScrollView>

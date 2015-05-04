@@ -3,15 +3,38 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_sign_up">SignUp</string>
+    <string name="title_activity_navigation">Navigation</string>
     <string name="login">Login</string>
     <string name="singUp">Sing Up</string>
     <string name="newToRideShare">New to Ride Share? Sing Up Here</string>
     <string name="fullName">Full Name</string>
     <string name="phone">Phone</string>
     <string name="confirmPassword">Confirm Password</string>
+    <string name="home">Home</string>
+    <string name="trip_planner">Trip Planner</string>
+    <string name="my_rides">My Rides</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="log_out">Log Out</string>
+    <string name="search_ride">Search Ride</string>
+    <string name="rank_ride">Rank Ride</string>
+    <string name="open_drawer">Drawer Opened</string>
+    <string name="close_drawer">Drawer Closed</string>
+
+    <string-array name="options">
+        <item>@string/home</item>
+        <item>@string/trip_planner</item>
+        <item>@string/my_rides</item>
+        <item>@string/personal_details</item>
+        <item>@string/log_out</item>
+    </string-array>
+
+    <string-array name="additional_options">
+        <item>@string/search_ride</item>
+        <item>@string/rank_ride</item>
+    </string-array>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="connecting">Connecting</string>
+
 </resources>
