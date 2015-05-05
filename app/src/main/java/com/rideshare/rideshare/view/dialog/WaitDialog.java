@@ -27,7 +27,8 @@ public class WaitDialog extends Dialog {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.setContentView(R.layout.fragment_wait_dialog);
-        this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        this.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.TRANSPARENT));
     }
 
     @Override

@@ -20,6 +20,19 @@
     <string name="rank_ride">Rank Ride</string>
     <string name="open_drawer">Drawer Opened</string>
     <string name="close_drawer">Drawer Closed</string>
+    <string name="request">Request</string>
+    <string name="ride">Ride</string>
+    <string name="destination">Destination</string>
+    <string name="source">Source</string>
+    <string name="from_time">From Time</string>
+    <string name="until_time">Until Time</string>
+    <string name="date">Date</string>
+    <string name="bag_small_none">None/Small Bag</string>
+    <string name="bag_big">Big Bag</string>
+    <string name="smoker">Smoker</string>
+    <string name="not_smoker">Not Smoker</string>
+    <string name="dont_care">Don\'t Care</string>
+    <string name="bag">Bag</string>
 
     <string-array name="options">
         <item>@string/home</item>
@@ -34,7 +47,16 @@
         <item>@string/rank_ride</item>
     </string-array>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="bag_options">
+        <item>@string/bag</item>
+        <item>@string/bag_small_none</item>
+        <item>@string/bag_big</item>
+    </string-array>
 
+    <string-array name="smoker_options">
+        <item>@string/smoker</item>
+        <item>@string/smoker</item>
+        <item>@string/not_smoker</item>
+        <item>@string/dont_care</item>
+    </string-array>
 </resources>

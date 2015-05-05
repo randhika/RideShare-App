@@ -51,7 +51,11 @@ public class NotificationFragment extends ListFragment {
 
         adapter = new NotificationAdapter(getActivity(), R.layout.notification_item, notifications);
         this.setListAdapter(adapter);
-        present.parseNotifications(notificationsStr);
+
+        if(notificationsStr != null)
+            present.parseNotifications(notificationsStr);
+        else
+            present.getNotifications(USER_ID);
 
         return view;
     }
@@ -69,5 +73,6 @@ public class NotificationFragment extends ListFragment {
     public void showNotification(ArrayList<Notification> notifications, String nextUrl) {
         this.nextNotificationsUrl = nextUrl;
         this.notifications.addAll(notifications);
+        adapter.notifyDataSetChanged();
     }
 }

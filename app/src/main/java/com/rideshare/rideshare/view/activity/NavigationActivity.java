@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.rideshare.rideshare.R;
 import com.rideshare.rideshare.view.fragment.NotificationFragment;
+import com.rideshare.rideshare.view.fragment.TripPlannerFragment;
 
 public class NavigationActivity extends FragmentActivity {
 
@@ -94,6 +95,8 @@ public class NavigationActivity extends FragmentActivity {
         switch (position){
             case 0:
                 return NotificationFragment.newInstance(args);
+            case 1:
+                return TripPlannerFragment.newInstance(args);
         }
         // Default value should never come to this point
         return NotificationFragment.newInstance(args);

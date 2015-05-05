@@ -1,10 +1,11 @@
 package com.rideshare.rideshare.present;
 
+import android.os.AsyncTask;
+import com.rideshare.rideshare.app.IdManager;
 import com.rideshare.rideshare.entity.AppResponse;
 import com.rideshare.rideshare.entity.Convertor;
 import com.rideshare.rideshare.entity.app.Notification;
 import com.rideshare.rideshare.view.fragment.NotificationFragment;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,9 +14,11 @@ import java.util.ArrayList;
 public class NotificationPresent {
 
     private NotificationFragment parent;
+    private IdManager idManager;
 
     public NotificationPresent(NotificationFragment fragment){
         this.parent = fragment;
+        idManager = new IdManager();
     }
 
     public void parseNotifications(String notifications){
@@ -58,5 +61,31 @@ public class NotificationPresent {
             nextUrl = null;
         }
         parent.showNotification(notifications, nextUrl);
+    }
+
+    public void getNotifications(String userId) {
+        new NotificationGrabber().execute(userId);
+    }
+
+    private class NotificationGrabber extends AsyncTask<String, Void, AppResponse> {
+
+        @Override
+        protected AppResponse doInBackground(String... params) {
+            AppResponse appResponse = new AppResponse();
+            idManager.getNotifications(params[0], null, null, appResponse);
+            return appResponse;
+        }
+
+        @Override
+        protected void onPostExecute(AppResponse result) {
+            postGetNotifications(result);
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
     }
 }
