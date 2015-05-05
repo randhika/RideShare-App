@@ -32,7 +32,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="7dp">
 
         <LinearLayout
@@ -155,27 +155,41 @@
                 </Spinner>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/manual_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true" />
-
-                <Button
-                    android:id="@+id/post_request"
-                    android:layout_toRightOf="@id/manual_search"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end" />
-
-            </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/manual_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="@string/manual_search"
+            style="@style/RideShareFlatButton"/>
+
+        <Button
+            android:id="@+id/post_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/post_request"
+            style="@style/RideShareButton"/>
+
+        <Button
+            android:id="@+id/post_ride"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/post_ride"
+            style="@style/RideShareButton"/>
+
+    </RelativeLayout>
+
 </LinearLayout>

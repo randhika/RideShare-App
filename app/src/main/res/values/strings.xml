@@ -33,6 +33,9 @@
     <string name="not_smoker">Not Smoker</string>
     <string name="dont_care">Don\'t Care</string>
     <string name="bag">Bag</string>
+    <string name="post_request">Post Request</string>
+    <string name="manual_search">Manual Search</string>
+    <string name="post_ride">Post Ride</string>
 
     <string-array name="options">
         <item>@string/home</item>

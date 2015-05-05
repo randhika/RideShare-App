@@ -80,6 +80,8 @@
         <item name="android:background">@drawable/button</item>
         <item name="android:textColor">@color/background</item>
         <item name="android:layout_margin">5dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
     </style>
 
     <style name="RideShareButtonTab" parent="RideShareButton">
@@ -88,7 +90,12 @@
     </style>
 
     <style name="RideShareFlatButton" parent="RideShareButton">
-        <item name="android:background">@drawable/button_transparent</item>
+        <item name="android:background">@color/gray_light</item>
+        <item name="android:textColor">@color/highlight</item>
+    </style>
+
+    <style name="RideShareTransparentButton" parent="RideShareFlatButton">
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:textColor">@color/highlight</item>
     </style>
 
