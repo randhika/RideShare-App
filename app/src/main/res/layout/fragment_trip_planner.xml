@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:scrollbars="vertical"
     tools:context="com.rideshare.rideshare.view.fragment.TripPlannerFragment">
 
     <LinearLayout
@@ -32,13 +33,21 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="7dp">
+        android:layout_height="wrap_content" >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:orientation="vertical"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp"
             android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/error"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                style="@style/RideShareTextError"/>
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/source"
@@ -65,6 +74,51 @@
                 app:primaryColor="@color/highlight"
                 android:hint="@string/destination"
                 style="@style/RideShareEditText"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3">
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/price"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:floatingLabel="highlight"
+                    android:layout_marginTop="0dp"
+                    android:inputType="number"
+                    android:textColorHint="@color/text"
+                    app:baseColor="@color/text"
+                    app:primaryColor="@color/highlight"
+                    android:hint="@string/price"
+                    style="@style/RideShareEditText"/>
+
+                <TextView
+                    android:id="@+id/nis"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nis"
+                    style="@style/RideShareText"/>
+
+                <Button
+                    android:id="@+id/add_stop"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/add_stop"
+                    style="@style/RideShareButtonSmall" />
+
+            </LinearLayout>
+
+            <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@android:id/list"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,8 +189,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:weightSum="2">
+
+                <Spinner
+                    android:id="@+id/smoker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/RideShareSpinner">
+                </Spinner>
 
                 <Spinner
                     android:id="@+id/bag"
@@ -147,7 +209,7 @@
                 </Spinner>
 
                 <Spinner
-                    android:id="@+id/smoker"
+                    android:id="@+id/passengers"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -155,41 +217,42 @@
                 </Spinner>
 
             </LinearLayout>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/manual_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/manual_search"
+                    style="@style/RideShareFlatButton"/>
+
+                <Button
+                    android:id="@+id/post_request"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/post_request"
+                    style="@style/RideShareButton"/>
+
+                <Button
+                    android:id="@+id/post_ride"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/post_ride"
+                    style="@style/RideShareButton"/>
+
+            </RelativeLayout>
+
         </LinearLayout>
     </ScrollView>
-
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/manual_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:text="@string/manual_search"
-            style="@style/RideShareFlatButton"/>
-
-        <Button
-            android:id="@+id/post_request"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="@string/post_request"
-            style="@style/RideShareButton"/>
-
-        <Button
-            android:id="@+id/post_ride"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:text="@string/post_ride"
-            style="@style/RideShareButton"/>
-
-    </RelativeLayout>
 
 </LinearLayout>

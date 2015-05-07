@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp"
+    android:minWidth="1080px"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fill_stop_information"
+        style="@style/RideShareText"/>
+
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        style="@style/RideShareTextError"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/stop_dialog_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:floatingLabel="highlight"
+        android:layout_marginTop="0dp"
+        android:inputType="text"
+        android:textColorHint="@color/text"
+        app:baseColor="@color/text"
+        app:primaryColor="@color/highlight"
+        android:hint="@string/address"
+        style="@style/RideShareEditText"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/stop_dialog_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:floatingLabel="highlight"
+        android:layout_marginTop="0dp"
+        android:inputType="number"
+        android:textColorHint="@color/text"
+        app:baseColor="@color/text"
+        app:primaryColor="@color/highlight"
+        android:hint="@string/price_until"
+        style="@style/RideShareEditText"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/stop_dialog_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:floatingLabel="highlight"
+        android:layout_marginTop="0dp"
+        android:inputType="number"
+        android:textColorHint="@color/text"
+        app:baseColor="@color/text"
+        app:primaryColor="@color/highlight"
+        android:hint="@string/time_arrive"
+        style="@style/RideShareEditText"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/stop_dialog_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            style="@style/RideShareButton"/>
+
+        <Button
+            android:id="@+id/stop_dialog_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_stop"
+            android:layout_gravity="end"
+            android:layout_alignParentRight="true"
+            style="@style/RideShareButton"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

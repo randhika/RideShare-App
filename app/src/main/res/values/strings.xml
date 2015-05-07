@@ -36,6 +36,19 @@
     <string name="post_request">Post Request</string>
     <string name="manual_search">Manual Search</string>
     <string name="post_ride">Post Ride</string>
+    <string name="add_stop">Add Stop</string>
+    <string name="price">Price</string>
+    <string name="nis">NIS</string>
+    <string name="passengers">Passengers</string>
+    <string name="one_passenger">1 Passenger</string>
+    <string name="two_passengers">2 Passengers</string>
+    <string name="three_passengers">3 Passengers</string>
+    <string name="four_passengers">4 Passengers</string>
+    <string name="fill_stop_information">Fill Stop Information</string>
+    <string name="address">Address</string>
+    <string name="price_until">Price Until Destination</string>
+    <string name="time_arrive">Time to Arrive from Source (in Minuets)</string>
+    <string name="cancel">Cancel</string>
 
     <string-array name="options">
         <item>@string/home</item>
@@ -61,5 +74,14 @@
         <item>@string/smoker</item>
         <item>@string/not_smoker</item>
         <item>@string/dont_care</item>
+    </string-array>passengers
+
+    <string-array name="passengers_options">
+        <item>@string/passengers</item>
+        <item>@string/one_passenger</item>
+        <item>@string/two_passengers</item>
+        <item>@string/three_passengers</item>
+        <item>@string/four_passengers</item>
     </string-array>
+
 </resources>

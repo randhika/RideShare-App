@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/list_stop_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/RideShareText"/>
+
+    <TextView
+        android:id="@+id/list_stop_price"
+        android:layout_below="@id/list_stop_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/RideShareTextSecondarySmall"/>
+
+    <TextView
+        android:id="@+id/list_stop_time"
+        android:layout_below="@id/list_stop_address"
+        android:layout_toRightOf="@id/list_stop_price"
+        android:paddingLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/RideShareTextSecondarySmall"/>
+
+    <ImageButton
+        android:id="@+id/list_delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_navigation_close"/>
+
+</RelativeLayout>

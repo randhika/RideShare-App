@@ -3,6 +3,7 @@ package com.rideshare.rideshare.view.dialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ import java.util.Calendar;
 
 public class TimePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
+
+    private final static int DATE_CODE = 101;
 
     private int textViewId;
 
@@ -30,5 +33,11 @@ public class TimePickerFragment extends DialogFragment
         c.set(1900, 0, 0, hourOfDay, minute);
         SimpleDateFormat df = new SimpleDateFormat("HH:mm");
         ((EditText) (getActivity().findViewById(textViewId))).setText(df.format(c.getTime()));
+
+        Intent data = new Intent();
+        data.putExtra("id", textViewId);
+        data.putExtra("text", df.format(c.getTime()));
+
+        getTargetFragment().onActivityResult(DATE_CODE, DATE_CODE, data);
     }
 }
