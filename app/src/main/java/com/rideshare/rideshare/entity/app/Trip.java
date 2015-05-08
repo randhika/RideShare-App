@@ -90,65 +90,65 @@ public class Trip {
     }
 
     public String validateRide(){
-        if(source != null){
+        if(source == null){
             return "Enter a Source Address";
         }
-        if(destination != null){
+        if(destination == null){
             return "Enter a Destination Address";
         }
-        if(geoSource != null){
+        if(geoSource == null){
             return "Source Address could not be found";
         }
-        if(geoDestination != null){
+        if(geoDestination == null){
             return "Destination Address could not be found";
         }
-        if(price != null && price >= 0){
+        if(price == null && price < 0){
             return "Enter a Valid Price";
         }
-        if(passengers != null){
+        if(passengers == null){
             return "Enter a Number of passengers";
         }
-        if(smoker != null){
+        if(smoker == null){
             return "Enter a Smoker Information";
         }
-        if(date != null){
+        if(date == null){
             return "Enter the Date of the Ride";
         }
-        if(timeFrom != null && timeUntil != null){
+        if(timeFrom == null && timeUntil == null){
             return "Enter the Time of the Ride";
         }
-        if(DateHandler.timeDiff(timeUntil, timeFrom) >= 0){
+        if(DateHandler.timeDiff(timeUntil, timeFrom) < 0){
             return "Invalid Time difference";
         }
         return null;
     }
 
     public String validateRequest(){
-        if(source != null){
+        if(source == null){
             return "Enter a Source Address";
         }
-        if(destination != null){
+        if(destination == null){
             return "Enter a Destination Address";
         }
-        if(geoSource != null){
+        if(geoSource == null){
             return "Source Address could not be found";
         }
-        if(geoDestination != null){
+        if(geoDestination == null){
             return "Destination Address could not be found";
         }
-        if(bag != null){
+        if(bag == null){
             return "Enter a Number of passengers";
         }
-        if(smoker != null){
+        if(smoker == null){
             return "Enter a Smoker Information";
         }
-        if(date != null){
+        if(date == null){
             return "Enter the Date of the Request";
         }
-        if(timeFrom != null && timeUntil != null){
+        if(timeFrom == null && timeUntil == null){
             return "Enter the Time of the Request";
         }
-        if(DateHandler.timeDiff(timeUntil, timeFrom) >= 0){
+        if(DateHandler.timeDiff(timeUntil, timeFrom) < 0){
             return "Invalid Time difference";
         }
         return null;
@@ -168,13 +168,15 @@ public class Trip {
         features.put("smoker", smoker.intValue());
         ride.put("features", features);
         JSONArray stopsArrayJSON = new JSONArray();
-        for(RideStop stop : stops){
+        for(int i = 0; i < stops.size(); i++){
+            RideStop stop = stops.get(i);
             JSONObject stopJSON = new JSONObject();
             stopJSON.put("address", stop.getAddress());
             stopJSON.put("price", stop.getPrice());
             stopJSON.put("time", stop.getTime());
             stopJSON.put("latitude", stop.getLatitude());
             stopJSON.put("longitude", stop.getLongitude());
+            stopsArrayJSON.put(i, stopJSON);
         }
         ride.put("stops", stopsArrayJSON);
         return ride.toString();

@@ -35,6 +35,8 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
     private final static int DATE_CODE = 101;
     private static String USER_ID;
 
+    public View currentFocus;
+
     private ArrayList<RideStop> stops;
     private AddStopAdapter adapter;
     private TripPlannerPresent present;
@@ -78,6 +80,12 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         requestBtn.setOnClickListener(this);
         Button addStopBtn = (Button) view.findViewById(R.id.add_stop);
         addStopBtn.setOnClickListener(this);
+        Button postRideBtn = (Button) view.findViewById(R.id.post_ride);
+        postRideBtn.setOnClickListener(this);
+        Button postRequestBtn = (Button) view.findViewById(R.id.post_request);
+        postRequestBtn.setOnClickListener(this);
+        Button searchBtn = (Button) view.findViewById(R.id.manual_search);
+        searchBtn.setOnClickListener(this);
         EditText date = (EditText) view.findViewById(R.id.date);
         date.setOnClickListener(this);
         EditText tf = (EditText) view.findViewById(R.id.time_from);
@@ -165,6 +173,8 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
     }
 
     private void postRide() {
+        if(currentFocus != null)
+            onFocusChange(currentFocus, false);
         present.postRide();
     }
 
@@ -288,7 +298,10 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        if(!hasFocus && v instanceof EditText && !((EditText) v).getText().toString().equals("")){
+        if(hasFocus && ((EditText) v).getText().toString().equals("")){
+            currentFocus = v;
+        }
+        else if(!hasFocus && v instanceof EditText && !((EditText) v).getText().toString().equals("")){
             present.changedValue(((EditText) v).getText().toString(), v.getId());
         }
     }
@@ -296,7 +309,7 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if(position != 0 && view != null && view instanceof TextView) {
-            present.changedValue(((TextView) view).getText().toString(), view.getId());
+            present.changedValue(((TextView) view).getText().toString(), parent.getId());
         }
     }
 

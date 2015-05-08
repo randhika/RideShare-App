@@ -80,12 +80,5 @@ public class NotificationPresent {
         protected void onPostExecute(AppResponse result) {
             postGetNotifications(result);
         }
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {}
     }
 }

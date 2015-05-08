@@ -2,6 +2,7 @@ package com.rideshare.rideshare.present;
 
 import android.os.AsyncTask;
 import com.rideshare.rideshare.R;
+import com.rideshare.rideshare.entity.AppResponse;
 import com.rideshare.rideshare.entity.app.Geo;
 import com.rideshare.rideshare.entity.app.RideStop;
 import com.rideshare.rideshare.entity.app.Trip;
@@ -144,4 +145,18 @@ public class TripPlannerPresent {
         }
     }
 
+    private class PostRide extends AsyncTask<String, Void, AppResponse> {
+
+        @Override
+        protected AppResponse doInBackground(String... params) {
+            AppResponse appResponse = new AppResponse();
+            tripManager.postRide(params[0], appResponse);
+            return appResponse;
+        }
+
+        @Override
+        protected void onPostExecute(AppResponse result) {
+
+        }
+    }
 }
