@@ -1,5 +1,11 @@
 package com.rideshare.rideshare.entity.app;
 
+import com.rideshare.rideshare.utils.DateHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Trip {
@@ -81,5 +87,96 @@ public class Trip {
 
     public void setTimeUntil(String timeUntil) {
         this.timeUntil = timeUntil;
+    }
+
+    public String validateRide(){
+        if(source != null){
+            return "Enter a Source Address";
+        }
+        if(destination != null){
+            return "Enter a Destination Address";
+        }
+        if(geoSource != null){
+            return "Source Address could not be found";
+        }
+        if(geoDestination != null){
+            return "Destination Address could not be found";
+        }
+        if(price != null && price >= 0){
+            return "Enter a Valid Price";
+        }
+        if(passengers != null){
+            return "Enter a Number of passengers";
+        }
+        if(smoker != null){
+            return "Enter a Smoker Information";
+        }
+        if(date != null){
+            return "Enter the Date of the Ride";
+        }
+        if(timeFrom != null && timeUntil != null){
+            return "Enter the Time of the Ride";
+        }
+        if(DateHandler.timeDiff(timeUntil, timeFrom) >= 0){
+            return "Invalid Time difference";
+        }
+        return null;
+    }
+
+    public String validateRequest(){
+        if(source != null){
+            return "Enter a Source Address";
+        }
+        if(destination != null){
+            return "Enter a Destination Address";
+        }
+        if(geoSource != null){
+            return "Source Address could not be found";
+        }
+        if(geoDestination != null){
+            return "Destination Address could not be found";
+        }
+        if(bag != null){
+            return "Enter a Number of passengers";
+        }
+        if(smoker != null){
+            return "Enter a Smoker Information";
+        }
+        if(date != null){
+            return "Enter the Date of the Request";
+        }
+        if(timeFrom != null && timeUntil != null){
+            return "Enter the Time of the Request";
+        }
+        if(DateHandler.timeDiff(timeUntil, timeFrom) >= 0){
+            return "Invalid Time difference";
+        }
+        return null;
+    }
+
+    public String toJsonRide() throws JSONException {
+        JSONObject ride = new JSONObject();
+        ride.put("source", source);
+        ride.put("destination", destination);
+        ride.put("time", DateHandler.timeDiff(timeUntil, timeFrom) / 60);
+        ride.put("date", date);
+        ride.put("timeFrom", timeFrom);
+        ride.put("timeUntil", timeUntil);
+        JSONObject features = new JSONObject();
+        features.put("price", price.intValue());
+        features.put("passengers", passengers.intValue());
+        features.put("smoker", smoker.intValue());
+        ride.put("features", features);
+        JSONArray stopsArrayJSON = new JSONArray();
+        for(RideStop stop : stops){
+            JSONObject stopJSON = new JSONObject();
+            stopJSON.put("address", stop.getAddress());
+            stopJSON.put("price", stop.getPrice());
+            stopJSON.put("time", stop.getTime());
+            stopJSON.put("latitude", stop.getLatitude());
+            stopJSON.put("longitude", stop.getLongitude());
+        }
+        ride.put("stops", stopsArrayJSON);
+        return ride.toString();
     }
 }

@@ -8,6 +8,9 @@ import com.rideshare.rideshare.entity.app.Trip;
 import com.rideshare.rideshare.service.GeoCoderParser;
 import com.rideshare.rideshare.view.fragment.TripPlannerFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class TripPlannerPresent {
 
     private TripPlannerFragment parent;
@@ -124,6 +127,20 @@ public class TripPlannerPresent {
             case R.id.passengers:
                 trip.setPassengers(Integer.parseInt(text.substring(0, 1)));
                 break;
+        }
+    }
+
+    public void postRide() {
+        String error = trip.validateRide();
+        if(error != null){
+            parent.showError(error);
+            return;
+        }
+        try {
+            String rideStrJSON = trip.toJsonRide();
+        } catch (JSONException e) {
+            parent.showError("Unexpected Error");
+            return;
         }
     }
 

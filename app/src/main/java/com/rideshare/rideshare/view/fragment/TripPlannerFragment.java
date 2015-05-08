@@ -158,7 +158,14 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
             case R.id.add_stop:
                 showAddStopDialog();
                 break;
+            case R.id.post_ride:
+                postRide();
+                break;
         }
+    }
+
+    private void postRide() {
+        present.postRide();
     }
 
     public int getStopPosition(RideStop rideStop){

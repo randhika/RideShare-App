@@ -46,6 +46,19 @@ public class DateHandler{
         epocFormat1 -= fromIsoToEpoch(iso2);
         return fromEpochToIsoTimeZone0(epocFormat1);
     }
+
+    public static int timeDiff(String time1, String time2){
+        int seconds1 = secondsDay(time1);
+        int seconds2 = secondsDay(time2);
+        return seconds1 - seconds2;
+    }
+
+    public static int secondsDay(String time){
+        String[] params = time.split(":");
+        int hours = Integer.parseInt(params[0]) * 3600;
+        int minuets = Integer.parseInt(params[1]) * 60;
+        return hours + minuets;
+    }
 }
 
 
