@@ -1,7 +1,10 @@
 package com.rideshare.rideshare.present;
 
 import android.os.AsyncTask;
+import android.widget.Toast;
+
 import com.rideshare.rideshare.R;
+import com.rideshare.rideshare.app.TripManager;
 import com.rideshare.rideshare.entity.AppResponse;
 import com.rideshare.rideshare.entity.app.Geo;
 import com.rideshare.rideshare.entity.app.RideStop;
@@ -18,11 +21,13 @@ public class TripPlannerPresent {
     private GeoCoderParser geoParser;
     private int mode;
     private Trip trip;
+    private TripManager tripManager;
 
     public TripPlannerPresent(TripPlannerFragment parent, String userId) {
         this.parent = parent;
         this.geoParser = new GeoCoderParser();
         this.trip = new Trip(userId);
+        this.tripManager = new TripManager();
     }
 
     public void addStop(RideStop rideStop){
@@ -138,17 +143,18 @@ public class TripPlannerPresent {
             return;
         }
         try {
-            String rideStrJSON = trip.toJsonRide();
+            JSONObject rideStrJSON = trip.toJsonRide();
+            new PostRide().execute(rideStrJSON);
         } catch (JSONException e) {
             parent.showError("Unexpected Error");
             return;
         }
     }
 
-    private class PostRide extends AsyncTask<String, Void, AppResponse> {
+    private class PostRide extends AsyncTask<JSONObject, Void, AppResponse> {
 
         @Override
-        protected AppResponse doInBackground(String... params) {
+        protected AppResponse doInBackground(JSONObject... params) {
             AppResponse appResponse = new AppResponse();
             tripManager.postRide(params[0], appResponse);
             return appResponse;
@@ -156,7 +162,11 @@ public class TripPlannerPresent {
 
         @Override
         protected void onPostExecute(AppResponse result) {
-
+            if(result.isValid()){
+                Toast.makeText(parent.getActivity(), "Ride Has Added", Toast.LENGTH_SHORT);
+            } else {
+                parent.showError("Unexpected Error");
+            }
         }
     }
 }

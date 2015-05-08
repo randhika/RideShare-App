@@ -154,7 +154,7 @@ public class Trip {
         return null;
     }
 
-    public String toJsonRide() throws JSONException {
+    public JSONObject toJsonRide() throws JSONException {
         JSONObject ride = new JSONObject();
         ride.put("source", source);
         ride.put("destination", destination);
@@ -179,6 +179,14 @@ public class Trip {
             stopsArrayJSON.put(i, stopJSON);
         }
         ride.put("stops", stopsArrayJSON);
-        return ride.toString();
+        JSONObject sourceGeo = new JSONObject();
+        sourceGeo.put("latitude", geoSource.getLatitude());
+        sourceGeo.put("longitude", geoSource.getLongitude());
+        JSONObject destinationGeo = new JSONObject();
+        destinationGeo.put("latitude", geoDestination.getLatitude());
+        destinationGeo.put("longitude", geoDestination.getLongitude());
+        ride.put("sourceGeo", sourceGeo);
+        ride.put("destinationGeo", destinationGeo);
+        return ride;
     }
 }
