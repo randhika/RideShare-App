@@ -187,6 +187,7 @@ public class Trip {
         destinationGeo.put("longitude", geoDestination.getLongitude());
         ride.put("sourceGeo", sourceGeo);
         ride.put("destinationGeo", destinationGeo);
+        ride.put("driver", user);
         return ride;
     }
 }
