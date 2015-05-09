@@ -17,8 +17,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rideshare.rideshare.R;
 import com.rideshare.rideshare.adapter.AddStopAdapter;
+import com.rideshare.rideshare.adapter.GooglePlacesAutocompleteAdapter;
 import com.rideshare.rideshare.adapter.SpinnerAdapter;
 import com.rideshare.rideshare.entity.app.RideStop;
 import com.rideshare.rideshare.present.TripPlannerPresent;
@@ -30,7 +32,8 @@ import com.rideshare.rideshare.view.dialog.TimePickerFragment;
 import java.util.ArrayList;
 
 public class TripPlannerFragment extends ListFragment implements View.OnClickListener,
-        View.OnFocusChangeListener, AdapterView.OnItemSelectedListener{
+        View.OnFocusChangeListener, AdapterView.OnItemSelectedListener,
+        AdapterView.OnItemClickListener{
 
     private final static int ADD_STOP_CODE = 100;
     private final static int DATE_CODE = 101;
@@ -93,16 +96,32 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         tf.setOnClickListener(this);
         EditText tu = (EditText) view.findViewById(R.id.time_until);
         tu.setOnClickListener(this);
-        EditText source = (EditText) view.findViewById(R.id.source);
+        MaterialAutoCompleteTextView source =
+                (MaterialAutoCompleteTextView) view.findViewById(R.id.source);
         source.setOnFocusChangeListener(this);
-        EditText destination = (EditText) view.findViewById(R.id.destination);
+        source.setOnItemClickListener(this);
+        MaterialAutoCompleteTextView destination =
+                (MaterialAutoCompleteTextView) view.findViewById(R.id.destination);
         destination.setOnFocusChangeListener(this);
+        destination.setOnItemClickListener(this);
         EditText price = (EditText) view.findViewById(R.id.price);
         price.setOnFocusChangeListener(this);
 
         setSpinners(view);
         showRequestOptions();
         setListHeight();
+        setAutoComplete();
+    }
+
+    private void setAutoComplete() {
+        MaterialAutoCompleteTextView sourceView = (MaterialAutoCompleteTextView) getActivity()
+                .findViewById(R.id.source);
+        sourceView.setAdapter(
+                new GooglePlacesAutocompleteAdapter(getActivity(), R.layout.autocomplete_item));
+        MaterialAutoCompleteTextView destinationView = (MaterialAutoCompleteTextView) getActivity()
+                .findViewById(R.id.destination);
+        destinationView.setAdapter(
+                new GooglePlacesAutocompleteAdapter(getActivity(), R.layout.autocomplete_item));
     }
 
     private void setSpinners(View view) {
@@ -330,5 +349,24 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
 
     public void toMyRides() {
         ((NavigationActivity)getActivity()).selectItem(3, null);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String address;
+        switch (view.getId()){
+            case R.id.source:
+                MaterialAutoCompleteTextView source =
+                        (MaterialAutoCompleteTextView) getActivity().findViewById(R.id.source);
+                address = (String) parent.getItemAtPosition(position);
+                source.setText(address);
+                break;
+            case R.id.destination:
+                MaterialAutoCompleteTextView destination =
+                        (MaterialAutoCompleteTextView) getActivity().findViewById(R.id.destination);
+                address = (String) parent.getItemAtPosition(position);
+                destination.setText(address);
+                break;
+        }
     }
 }
