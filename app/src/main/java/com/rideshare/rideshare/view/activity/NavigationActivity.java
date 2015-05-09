@@ -70,7 +70,7 @@ public class NavigationActivity extends FragmentActivity {
         }
     }
 
-    private void selectItem(int position, Bundle bundle) {
+    public void selectItem(int position, Bundle bundle) {
         if(bundle == null){
             bundle = new Bundle();
         }

@@ -22,6 +22,7 @@ import com.rideshare.rideshare.adapter.AddStopAdapter;
 import com.rideshare.rideshare.adapter.SpinnerAdapter;
 import com.rideshare.rideshare.entity.app.RideStop;
 import com.rideshare.rideshare.present.TripPlannerPresent;
+import com.rideshare.rideshare.view.activity.NavigationActivity;
 import com.rideshare.rideshare.view.dialog.DatePickerFragment;
 import com.rideshare.rideshare.view.dialog.StopDialog;
 import com.rideshare.rideshare.view.dialog.TimePickerFragment;
@@ -169,6 +170,9 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
             case R.id.post_ride:
                 postRide();
                 break;
+            case R.id.post_request:
+                postRequest();
+                break;
         }
     }
 
@@ -176,6 +180,12 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         if(currentFocus != null)
             onFocusChange(currentFocus, false);
         present.postRide();
+    }
+
+    private void postRequest() {
+        if(currentFocus != null)
+            onFocusChange(currentFocus, false);
+        present.postRequest();
     }
 
     public int getStopPosition(RideStop rideStop){
@@ -316,5 +326,9 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    public void toMyRides() {
+        ((NavigationActivity)getActivity()).selectItem(3, null);
     }
 }

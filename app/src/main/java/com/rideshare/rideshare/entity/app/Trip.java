@@ -158,7 +158,6 @@ public class Trip {
         JSONObject ride = new JSONObject();
         ride.put("source", source);
         ride.put("destination", destination);
-        ride.put("time", DateHandler.timeDiff(timeUntil, timeFrom) / 60);
         ride.put("date", date);
         ride.put("timeFrom", timeFrom);
         ride.put("timeUntil", timeUntil);
@@ -189,5 +188,28 @@ public class Trip {
         ride.put("destinationGeo", destinationGeo);
         ride.put("driver", user);
         return ride;
+    }
+
+    public JSONObject toJsonRequest() throws JSONException {
+        JSONObject request = new JSONObject();
+        request.put("source", source);
+        request.put("destination", destination);
+        request.put("date", date);
+        request.put("timeExitFrom", timeFrom);
+        request.put("timeExitUntil", timeUntil);
+        JSONObject features = new JSONObject();
+        features.put("bags", bag.intValue());
+        features.put("smoker", smoker.intValue());
+        request.put("features", features);
+        JSONObject sourceGeo = new JSONObject();
+        sourceGeo.put("latitude", geoSource.getLatitude());
+        sourceGeo.put("longitude", geoSource.getLongitude());
+        JSONObject destinationGeo = new JSONObject();
+        destinationGeo.put("latitude", geoDestination.getLatitude());
+        destinationGeo.put("longitude", geoDestination.getLongitude());
+        request.put("sourceGeo", sourceGeo);
+        request.put("destinationGeo", destinationGeo);
+        request.put("user", user);
+        return request;
     }
 }

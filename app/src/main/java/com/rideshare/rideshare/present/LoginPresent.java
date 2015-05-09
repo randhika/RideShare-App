@@ -31,6 +31,7 @@ public class LoginPresent {
     private void postLogin(AppResponse loginResult){
         if(!loginResult.isValid()){
             parent.showError("Unexpected Error Accorded");
+            parent.dismissWaitingDialog();
             return;
         }
         JSONObject responseJSON = loginResult.getJSON();
@@ -44,12 +45,15 @@ public class LoginPresent {
                 errorCode = -1;
                 msg = null;
                 parent.showError("Unexpected Error Accorded");
+                parent.dismissWaitingDialog();
                 e.printStackTrace();
             }
             if(errorCode == 10111001 || errorCode == 10111002){
                 parent.showError(msg);
+                parent.dismissWaitingDialog();
             } else {
                 parent.showError("Unexpected Error Accorded");
+                parent.dismissWaitingDialog();
             }
         }
         else {
@@ -57,6 +61,7 @@ public class LoginPresent {
                 getNotifications(loginResult.getJSON().getString("_id"));
             } catch (JSONException e) {
                 parent.showError("Unexpected Error Accorded");
+                parent.dismissWaitingDialog();
             }
         }
     }

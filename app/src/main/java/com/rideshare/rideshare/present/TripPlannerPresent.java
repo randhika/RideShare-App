@@ -143,11 +143,24 @@ public class TripPlannerPresent {
             return;
         }
         try {
-            JSONObject rideStrJSON = trip.toJsonRide();
-            new PostRide().execute(rideStrJSON);
+            JSONObject rideJSON = trip.toJsonRide();
+            new PostRide().execute(rideJSON);
         } catch (JSONException e) {
             parent.showError("Unexpected Error");
+        }
+    }
+
+    public void postRequest() {
+        String error = trip.validateRequest();
+        if(error != null){
+            parent.showError(error);
             return;
+        }
+        try {
+            JSONObject requestJSON = trip.toJsonRequest();
+            new PostRequest().execute(requestJSON);
+        } catch (JSONException e) {
+            parent.showError("Unexpected Error");
         }
     }
 
@@ -163,7 +176,30 @@ public class TripPlannerPresent {
         @Override
         protected void onPostExecute(AppResponse result) {
             if(result.isValid()){
-                Toast.makeText(parent.getActivity(), "Ride Has Added", Toast.LENGTH_SHORT);
+                Toast.makeText(parent.getActivity(), "Ride has been Added", Toast.LENGTH_SHORT)
+                        .show();
+                parent.toMyRides();
+            } else {
+                parent.showError("Unexpected Error");
+            }
+        }
+    }
+
+    private class PostRequest extends AsyncTask<JSONObject, Void, AppResponse> {
+
+        @Override
+        protected AppResponse doInBackground(JSONObject... params) {
+            AppResponse appResponse = new AppResponse();
+            tripManager.postRequest(params[0], appResponse);
+            return appResponse;
+        }
+
+        @Override
+        protected void onPostExecute(AppResponse result) {
+            if(result.isValid()){
+                Toast.makeText(parent.getActivity(), "Ride has been Added", Toast.LENGTH_SHORT)
+                        .show();
+                parent.toMyRides();
             } else {
                 parent.showError("Unexpected Error");
             }
