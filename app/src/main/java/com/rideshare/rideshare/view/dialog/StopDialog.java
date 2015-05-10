@@ -1,7 +1,6 @@
 package com.rideshare.rideshare.view.dialog;
 
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,12 +13,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rideshare.rideshare.R;
 import com.rideshare.rideshare.adapter.GooglePlacesAutocompleteAdapter;
-import com.rideshare.rideshare.entity.AppResponse;
 import com.rideshare.rideshare.service.ArrivalTime;
 
 
@@ -106,7 +103,13 @@ public class StopDialog extends DialogFragment implements View.OnClickListener,
                 (MaterialAutoCompleteTextView) getDialog().findViewById(R.id.stop_dialog_address);
         address = (String) parent.getItemAtPosition(position);
         stopAddress.setText(address);
-        new TimeGrabber(((MaterialAutoCompleteTextView) getActivity().findViewById(R.id.source)).getText().toString(), address).execute();
+
+        if(checkAddressExist())
+            new TimeGrabber(((MaterialAutoCompleteTextView) getActivity().findViewById(R.id.source)).getText().toString(), address).execute();
+    }
+
+    private boolean checkAddressExist() {
+        return !((MaterialAutoCompleteTextView) getActivity().findViewById(R.id.source)).getText().toString().equals("");
     }
 
 
@@ -130,7 +133,8 @@ public class StopDialog extends DialogFragment implements View.OnClickListener,
 
         @Override
         protected void onPostExecute(String result) {
-            ((EditText) getDialog().findViewById(R.id.stop_dialog_time)).setText(Integer.toString(this.time));
+            if(this.time != -1)
+                ((EditText) getDialog().findViewById(R.id.stop_dialog_time)).setText(Integer.toString(this.time));
         }
 
         @Override

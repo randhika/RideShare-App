@@ -13,10 +13,11 @@ import org.json.JSONObject;
 
 public class ArrivalTime {
 
-    private final String URL_STRING = "https://maps.googleapis.com/maps/api/directions/json";
-    private final String API_KEY = "AIzaSyBMCcedH6pb5elMBT-_jV2FYJg3rbfOcB8";
+    private final String URL_STRING;
 
-    public ArrivalTime(){}
+    public ArrivalTime(){
+        URL_STRING = "https://maps.googleapis.com/maps/api/directions/json";
+    }
 
     public int getExpectedTimeToArrive(String source, String dest) {
 
@@ -55,15 +56,14 @@ public class ArrivalTime {
             JSONObject json = new JSONObject(fullResponse);
             JSONArray jsonArr = json.getJSONArray("routes");
             if(jsonArr.length() == 0){
-                throw new Error("empty first array");
+                return -1;
             }
             jsonArr = jsonArr.getJSONObject(0).getJSONArray("legs");
             if(jsonArr.length() == 0){
-                throw new Error("empty second array");
+                return -1;
             }
             json = jsonArr.getJSONObject(0).getJSONObject("duration");
-            int time = json.getInt("value")/60;
-            return time;
+            return json.getInt("value")/60;
         } catch (JSONException e){
             e.printStackTrace();
         }
