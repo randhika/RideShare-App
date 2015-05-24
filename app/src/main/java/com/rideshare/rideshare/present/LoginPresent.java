@@ -3,12 +3,10 @@ package com.rideshare.rideshare.present;
 import android.os.AsyncTask;
 import com.rideshare.rideshare.entity.AppResponse;
 import com.rideshare.rideshare.view.activity.LoginActivity;
-import com.rideshare.rideshare.app.IdManager;
+import com.rideshare.rideshare.manager.IdManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class LoginPresent {
 

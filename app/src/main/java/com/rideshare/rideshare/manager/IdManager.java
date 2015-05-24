@@ -1,4 +1,4 @@
-package com.rideshare.rideshare.app;
+package com.rideshare.rideshare.manager;
 
 import com.rideshare.rideshare.entity.AppResponse;
 import org.json.JSONException;

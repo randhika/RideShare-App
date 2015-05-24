@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class Trip {
@@ -19,6 +20,8 @@ public class Trip {
     private Integer bag;
     private Integer passengers;
     private String date;
+    private String type;
+    private int status;
     private String timeFrom;
     private String timeUntil;
     private ArrayList<RideStop> stops;
@@ -29,15 +32,39 @@ public class Trip {
         this.stops = new ArrayList<>();
     }
 
+    public Trip(){
+        this.stops = new ArrayList<>();
+    }
+
     public void setBag(String bag) {
         if(bag.equals("None/Small Bag"))
-            this.smoker = 1;
+            this.bag = 1;
         else if(bag.equals("Big Bag"))
-            this.smoker = 2;
+            this.bag = 2;
     }
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public void setSmoker(Integer smoker) {
+        this.smoker = smoker;
+    }
+
+    public void setBag(Integer bag) {
+        this.bag = bag;
     }
 
     public void setDestination(String destination) {
@@ -73,6 +100,38 @@ public class Trip {
         this.source = source;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public int getPassengers() {
+        return passengers.intValue();
+    }
+
+    public int getPrice() {
+        return price.intValue();
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getTimeFrom() {
+        return timeFrom;
+    }
+
+    public String getTimeUntil() {
+        return timeUntil;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
     public void addStop(RideStop stop) {
         this.stops.add(stop);
     }
@@ -102,7 +161,7 @@ public class Trip {
         if(geoDestination == null){
             return "Destination Address could not be found";
         }
-        if(price == null && price < 0){
+        if(price == null || price < 0){
             return "Enter a Valid Price";
         }
         if(passengers == null){
@@ -137,7 +196,7 @@ public class Trip {
             return "Destination Address could not be found";
         }
         if(bag == null){
-            return "Enter a Number of passengers";
+            return "Enter Your Bags Option";
         }
         if(smoker == null){
             return "Enter a Smoker Information";
@@ -154,7 +213,7 @@ public class Trip {
         return null;
     }
 
-    public JSONObject toJsonRide() throws JSONException {
+    public JSONObject toJsonRide() throws JSONException, UnsupportedEncodingException {
         JSONObject ride = new JSONObject();
         ride.put("source", source);
         ride.put("destination", destination);
@@ -211,5 +270,46 @@ public class Trip {
         request.put("destinationGeo", destinationGeo);
         request.put("user", user);
         return request;
+    }
+
+    public static Trip fromJSON(JSONObject trip) throws JSONException {
+        Trip t = new Trip();
+        t.setType(trip.getString("type"));
+        t.setSource(trip.getString("source"));
+        t.setDestination(trip.getString("destination"));
+        t.setDate(trip.getString("date"));
+        t.setTimeFrom(trip.getString("timeExitFrom"));
+        t.setTimeUntil(trip.getString("timeExitUntil"));
+        t.setStatus(trip.getInt("status"));
+        JSONObject features = trip.getJSONObject("features");
+        if (t.getType().equals("request")) {
+            t.setSmoker(features.getInt("smoker"));
+        } else {
+            t.setPassengers(features.getInt("passengers"));
+            t.setPrice(features.getInt("price"));
+        }
+        return t;
+    }
+
+    public String getSmoker(){
+        switch (smoker) {
+            case 1:
+                return "Not Smoker";
+            case 2:
+                return "Don't Care";
+            case 3:
+                return "Smoker";
+        }
+        return "";
+    }
+
+    public String getBag(){
+        switch (bag) {
+            case 1:
+                return "None/Small Bag";
+            case 2:
+                return "Big Bag";
+        }
+        return "";
     }
 }

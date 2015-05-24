@@ -1,9 +1,6 @@
-package com.rideshare.rideshare.app;
+package com.rideshare.rideshare.manager;
 
 import com.rideshare.rideshare.communication.Http;
-import com.rideshare.rideshare.entity.AppResponse;
-
-import org.json.JSONObject;
 
 public abstract class Manager {
 

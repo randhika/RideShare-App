@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.rideshare.rideshare.R;
-import com.rideshare.rideshare.app.TripManager;
+import com.rideshare.rideshare.manager.TripManager;
 import com.rideshare.rideshare.entity.AppResponse;
 import com.rideshare.rideshare.entity.app.Geo;
 import com.rideshare.rideshare.entity.app.RideStop;
@@ -15,19 +15,23 @@ import com.rideshare.rideshare.view.fragment.TripPlannerFragment;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+
 public class TripPlannerPresent {
 
     private TripPlannerFragment parent;
     private GeoCoderParser geoParser;
-    private int mode;
     private Trip trip;
     private TripManager tripManager;
+    private ArrayList<AsyncTask> tasks;
 
     public TripPlannerPresent(TripPlannerFragment parent, String userId) {
         this.parent = parent;
         this.geoParser = new GeoCoderParser();
         this.trip = new Trip(userId);
         this.tripManager = new TripManager();
+        this.tasks = new ArrayList<>();
     }
 
     public void addStop(RideStop rideStop){
@@ -38,15 +42,11 @@ public class TripPlannerPresent {
         trip.deleteStop(position);
     }
 
-    public void setRideMode(){
-        this.mode = 1;
-    }
-
-    public void setRequestMode(){
-        this.mode = 0;
-    }
-
     private class GeoFinderStop extends AsyncTask<RideStop, Void, RideStop> {
+
+        public GeoFinderStop(){
+            tasks.add(this);
+        }
 
         @Override
         protected RideStop doInBackground(RideStop... params) {
@@ -67,10 +67,15 @@ public class TripPlannerPresent {
                 parent.onDeleteStop(position);
                 parent.showError("Could not found address " + result.getAddress());
             }
+            tasks.remove(this);
         }
     }
 
     private class GeoFinder extends AsyncTask<String, Void, String> {
+
+        public GeoFinder(){
+            tasks.add(this);
+        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -97,9 +102,14 @@ public class TripPlannerPresent {
         protected void onPostExecute(String result) {
             if(result != null && result.equals("source")){
                 parent.showError("Source Address can't be found");
+                parent.clean("source");
+                trip.setGeoSource(null);
             } else if(result != null) {
                 parent.showError("Destination Address can't be found");
+                parent.clean("destination");
+                trip.setGeoDestination(null);
             }
+            tasks.remove(this);
         }
     }
 
@@ -137,71 +147,95 @@ public class TripPlannerPresent {
     }
 
     public void postRide() {
-        String error = trip.validateRide();
-        if(error != null){
-            parent.showError(error);
-            return;
-        }
-        try {
-            JSONObject rideJSON = trip.toJsonRide();
-            new PostRide().execute(rideJSON);
-        } catch (JSONException e) {
-            parent.showError("Unexpected Error");
-        }
+        new PostRide().execute();
     }
 
     public void postRequest() {
-        String error = trip.validateRequest();
-        if(error != null){
-            parent.showError(error);
-            return;
-        }
-        try {
-            JSONObject requestJSON = trip.toJsonRequest();
-            new PostRequest().execute(requestJSON);
-        } catch (JSONException e) {
-            parent.showError("Unexpected Error");
-        }
+        new PostRequest().execute();
     }
 
-    private class PostRide extends AsyncTask<JSONObject, Void, AppResponse> {
+    private class PostRide extends AsyncTask<Void, Void, String> {
 
         @Override
-        protected AppResponse doInBackground(JSONObject... params) {
-            AppResponse appResponse = new AppResponse();
-            tripManager.postRide(params[0], appResponse);
-            return appResponse;
+        protected String doInBackground(Void... params) {
+            AppResponse appResponse = new AppResponse(false);
+            while(tasks.size() > 0){
+                try { this.wait(500);}
+                catch (InterruptedException ignored){}
+            }
+            String error = trip.validateRide();
+            if(error != null){
+                return error;
+            }
+            try {
+                JSONObject rideJSON = trip.toJsonRide();
+                tripManager.postRide(rideJSON, appResponse);
+            } catch (JSONException e) {
+                return "Unexpected Error";
+            } catch (UnsupportedEncodingException e) {
+                return "Unexpected Error";
+            }
+            if(!appResponse.isValid()){
+                return "Unexpected Error";
+            }
+            if(appResponse.getStatus() != 200){
+                try {
+                    return appResponse.getJSON().getString("msg");
+                } catch (JSONException e) {
+                    return "Unexpected Error";
+                }
+            }
+            return null;
         }
 
         @Override
-        protected void onPostExecute(AppResponse result) {
-            if(result.isValid()){
+        protected void onPostExecute(String result) {
+            if(result == null){
                 Toast.makeText(parent.getActivity(), "Ride has been Added", Toast.LENGTH_SHORT)
                         .show();
                 parent.toMyRides();
             } else {
-                parent.showError("Unexpected Error");
+                parent.showError(result);
             }
         }
     }
 
-    private class PostRequest extends AsyncTask<JSONObject, Void, AppResponse> {
+    private class PostRequest extends AsyncTask<Void, Void, String> {
 
         @Override
-        protected AppResponse doInBackground(JSONObject... params) {
-            AppResponse appResponse = new AppResponse();
-            tripManager.postRequest(params[0], appResponse);
-            return appResponse;
+        protected String doInBackground(Void... params) {
+            AppResponse appResponse = new AppResponse(false);
+            String error = trip.validateRequest();
+            if(error != null){
+                return error;
+            }
+            try {
+                JSONObject requestJSON = trip.toJsonRequest();
+                tripManager.postRequest(requestJSON, appResponse);
+            } catch (JSONException e) {
+                return "Unexpected Error";
+            }
+            if(!appResponse.isValid()){
+                return "Unexpected Error";
+            }
+            if(appResponse.getStatus() != 200){
+                try {
+                    return appResponse.getJSON().getString("msg");
+                } catch (JSONException e) {
+                    return "Unexpected Error";
+                }
+            }
+            return null;
         }
 
         @Override
-        protected void onPostExecute(AppResponse result) {
-            if(result.isValid()){
-                Toast.makeText(parent.getActivity(), "Ride has been Added", Toast.LENGTH_SHORT)
+        protected void onPostExecute(String result) {
+            if(result == null){
+                Toast.makeText(parent.getActivity(), "Request has been Added", Toast.LENGTH_SHORT)
                         .show();
                 parent.toMyRides();
             } else {
-                parent.showError("Unexpected Error");
+                parent.showError(result);
             }
         }
     }

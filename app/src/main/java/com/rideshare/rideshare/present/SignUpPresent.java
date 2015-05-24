@@ -2,7 +2,7 @@ package com.rideshare.rideshare.present;
 
 import android.os.AsyncTask;
 
-import com.rideshare.rideshare.app.IdManager;
+import com.rideshare.rideshare.manager.IdManager;
 import com.rideshare.rideshare.entity.AppResponse;
 import com.rideshare.rideshare.view.activity.SignUpActivity;
 
@@ -75,13 +75,5 @@ public class SignUpPresent {
         protected void onPostExecute(AppResponse registrationResult) {
             postRegistration(registrationResult);
         }
-
-        @Override
-        protected void onPreExecute() {
-
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {}
     }
 }

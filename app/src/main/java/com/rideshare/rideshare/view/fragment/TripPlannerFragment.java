@@ -5,8 +5,6 @@ import android.app.DialogFragment;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.rideshare.rideshare.R;
 import com.rideshare.rideshare.adapter.AddStopAdapter;
@@ -294,8 +291,6 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         hideView(getActivity().findViewById(R.id.manual_search));
         hideView(getActivity().findViewById(R.id.bag));
         showView(getListView());
-
-        present.setRideMode();
     }
 
     private void showRequestOptions() {
@@ -313,8 +308,6 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         showView(getActivity().findViewById(R.id.manual_search));
         showView(getActivity().findViewById(R.id.bag));
         hideView(getListView());
-
-        present.setRequestMode();
     }
 
     private void hideView(View v){
@@ -327,7 +320,7 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        if(hasFocus && ((EditText) v).getText().toString().equals("")){
+        if(hasFocus && v instanceof EditText){
             currentFocus = v;
         }
         else if(!hasFocus && v instanceof EditText && !((EditText) v).getText().toString().equals("")){
@@ -348,7 +341,7 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
     }
 
     public void toMyRides() {
-        ((NavigationActivity)getActivity()).selectItem(3, null);
+        ((NavigationActivity)getActivity()).selectItem(2, null);
     }
 
     @Override
@@ -367,6 +360,14 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
                 address = (String) parent.getItemAtPosition(position);
                 destination.setText(address);
                 break;
+        }
+    }
+
+    public void clean(String id) {
+        if(id.equals("source")){
+            ((EditText) getActivity().findViewById(R.id.source)).setText("");
+        } else {
+            ((EditText) getActivity().findViewById(R.id.destination)).setText("");
         }
     }
 }
