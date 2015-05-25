@@ -88,5 +88,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="remove">Remove</string>
     <string name="update">Update</string>
+    <string name="update_request">Update Request</string>
 
 </resources>

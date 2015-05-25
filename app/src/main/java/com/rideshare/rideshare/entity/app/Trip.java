@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class Trip {
 
+    private String id;
     private String source;
     private String destination;
     private RideStop geoSource;
@@ -21,7 +22,7 @@ public class Trip {
     private Integer passengers;
     private String date;
     private String type;
-    private int status;
+    private Integer status;
     private String timeFrom;
     private String timeUntil;
     private ArrayList<RideStop> stops;
@@ -53,6 +54,10 @@ public class Trip {
 
     public String getType() {
         return type;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setStatus(int status) {
@@ -105,11 +110,15 @@ public class Trip {
     }
 
     public int getPassengers() {
-        return passengers.intValue();
+        return passengers;
     }
 
     public int getPrice() {
-        return price.intValue();
+        return price;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDate() {
@@ -215,6 +224,11 @@ public class Trip {
 
     public JSONObject toJsonRide() throws JSONException, UnsupportedEncodingException {
         JSONObject ride = new JSONObject();
+        if(id != null){
+            ride.put("_id", id);
+        }
+        ride.put("type", type);
+        ride.put("status", status);
         ride.put("source", source);
         ride.put("destination", destination);
         ride.put("date", date);
@@ -251,11 +265,18 @@ public class Trip {
 
     public JSONObject toJsonRequest() throws JSONException {
         JSONObject request = new JSONObject();
+        if(id != null){
+            request.put("_id", id);
+        }
         request.put("source", source);
         request.put("destination", destination);
         request.put("date", date);
         request.put("timeExitFrom", timeFrom);
         request.put("timeExitUntil", timeUntil);
+        if(type != null)
+            request.put("type", type);
+        if(status != null)
+            request.put("status", status);
         JSONObject features = new JSONObject();
         features.put("bags", bag.intValue());
         features.put("smoker", smoker.intValue());
@@ -274,6 +295,7 @@ public class Trip {
 
     public static Trip fromJSON(JSONObject trip) throws JSONException {
         Trip t = new Trip();
+        t.setId(trip.getString("_id"));
         t.setType(trip.getString("type"));
         t.setSource(trip.getString("source"));
         t.setDestination(trip.getString("destination"));
@@ -284,10 +306,18 @@ public class Trip {
         JSONObject features = trip.getJSONObject("features");
         if (t.getType().equals("request")) {
             t.setSmoker(features.getInt("smoker"));
+            t.setBag(features.getInt("bags"));
         } else {
+            t.setSmoker(features.getInt("smoker"));
             t.setPassengers(features.getInt("passengers"));
             t.setPrice(features.getInt("price"));
         }
+        JSONObject sourceGeo = trip.getJSONObject("sourceGeo");
+        JSONObject destinationGeo = trip.getJSONObject("destinationGeo");
+        t.setGeoDestination(new RideStop(null, null, null,
+                destinationGeo.getDouble("latitude"), destinationGeo.getDouble("longitude")));
+        t.setGeoSource(new RideStop(null, null, null,
+                sourceGeo.getDouble("latitude"), sourceGeo.getDouble("longitude")));
         return t;
     }
 
@@ -303,6 +333,10 @@ public class Trip {
         return "";
     }
 
+    public int getSmokerValue(){
+        return smoker;
+    }
+
     public String getBag(){
         switch (bag) {
             case 1:
@@ -311,5 +345,9 @@ public class Trip {
                 return "Big Bag";
         }
         return "";
+    }
+
+    public int getBagValue(){
+        return bag;
     }
 }

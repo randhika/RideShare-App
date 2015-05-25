@@ -15,6 +15,7 @@ public class NotificationPresent {
 
     private NotificationFragment parent;
     private IdManager idManager;
+    private NotificationGrabber notificationAsync;
 
     public NotificationPresent(NotificationFragment fragment){
         this.parent = fragment;
@@ -64,10 +65,13 @@ public class NotificationPresent {
     }
 
     public void getNotifications(String userId) {
-        new NotificationGrabber().execute(userId);
+        notificationAsync = new NotificationGrabber();
+        notificationAsync.execute(userId);
     }
 
     private class NotificationGrabber extends AsyncTask<String, Void, AppResponse> {
+
+        private boolean cancel = false;
 
         @Override
         protected AppResponse doInBackground(String... params) {
@@ -78,7 +82,18 @@ public class NotificationPresent {
 
         @Override
         protected void onPostExecute(AppResponse result) {
-            postGetNotifications(result);
+            notificationAsync = null;
+            if(!cancel)
+                postGetNotifications(result);
         }
+
+        public void cancel() {
+            this.cancel = true;
+        }
+    }
+
+    public void stopAsync(){
+        if(notificationAsync != null)
+            notificationAsync.cancel();
     }
 }

@@ -68,6 +68,7 @@ public class NotificationFragment extends ListFragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        present.stopAsync();
     }
 
     public void showNotification(ArrayList<Notification> notifications, String nextUrl) {

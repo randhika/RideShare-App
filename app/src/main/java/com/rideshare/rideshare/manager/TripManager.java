@@ -23,6 +23,11 @@ public class TripManager extends Manager {
         httpHandler.postJSON(json, url, appResponse);
     }
 
+    public void updateRequest(JSONObject json, AppResponse appResponse){
+        String url = buildUrl(REQUEST_URI);
+        httpHandler.putJSON(json, url, appResponse);
+    }
+
     public void getMyRides(String userId, AppResponse appResponse){
         String url = buildUrl(MY_RIDES_URI) + "?user=" + userId;
         httpHandler.getJSON(url, appResponse);

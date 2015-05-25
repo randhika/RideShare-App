@@ -49,6 +49,10 @@
         <item name="android:textColor">@color/text_secondary</item>
     </style>
 
+    <style name="RideShareTextSecondaryLight" parent="RideShareTextSecondary">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
     <style name="RideShareTextSecondarySmall">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_secondary</item>

@@ -6,6 +6,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
@@ -89,6 +90,40 @@ public class Http {
     public void postJSON(JSONObject json, String url, AppResponse result){
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost request = new HttpPost(url);
+        HttpResponse response;
+
+        try{
+            request.addHeader("content-type", "application/json");
+            StringEntity bodyEntity = new StringEntity(json.toString(), HTTP.UTF_8);
+            request.setEntity(bodyEntity);
+            response = httpClient.execute(request);
+        } catch (IOException e) {
+            Log.e("postJSON", "IOException", e);
+            response = null;
+        }
+
+        if(response == null){
+            httpClient.getConnectionManager().shutdown();
+            return;
+        }
+
+        try{
+            int status = response.getStatusLine().getStatusCode();
+            String responseString = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
+            JSONObject jsonObject = new JSONObject(responseString);
+            result.init(status, jsonObject);
+        } catch (JSONException e) {
+            Log.e("postJSON", "JSONException", e);
+        } catch (IOException e) {
+            Log.e("postJSON", "IOException2", e);
+        } finally {
+            httpClient.getConnectionManager().shutdown();
+        }
+    }
+
+    public void putJSON(JSONObject json, String url, AppResponse result){
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPut request = new HttpPut(url);
         HttpResponse response;
 
         try{
