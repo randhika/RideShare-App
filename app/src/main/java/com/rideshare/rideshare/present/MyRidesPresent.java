@@ -1,6 +1,7 @@
 package com.rideshare.rideshare.present;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.rideshare.rideshare.manager.TripManager;
 import com.rideshare.rideshare.entity.AppResponse;
@@ -55,8 +56,8 @@ public class MyRidesPresent {
                     if(t != null)
                         myTrips.add(t);
                 }
-            } catch (JSONException ignored) {
-                return;
+            } catch (JSONException e) {
+                Log.e("getTrips", "JSONException", e);
             }
             parent.updateTips(nextUrl, myTrips);
         }

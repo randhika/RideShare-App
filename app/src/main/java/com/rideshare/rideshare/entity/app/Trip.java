@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Trip {
 
     private String id;
+    private String driver;
     private String source;
     private String destination;
     private RideStop geoSource;
@@ -30,6 +31,7 @@ public class Trip {
 
     public Trip(String userId){
         this.user = userId;
+        this.driver = userId;
         this.stops = new ArrayList<>();
     }
 
@@ -157,6 +159,14 @@ public class Trip {
         this.timeUntil = timeUntil;
     }
 
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
     public String validateRide(){
         if(source == null){
             return "Enter a Source Address";
@@ -232,6 +242,7 @@ public class Trip {
         ride.put("source", source);
         ride.put("destination", destination);
         ride.put("date", date);
+        ride.put("driver", driver);
         ride.put("timeFrom", timeFrom);
         ride.put("timeUntil", timeUntil);
         JSONObject features = new JSONObject();
@@ -307,10 +318,12 @@ public class Trip {
         if (t.getType().equals("request")) {
             t.setSmoker(features.getInt("smoker"));
             t.setBag(features.getInt("bags"));
+            t.setUser(trip.getString("user"));
         } else {
             t.setSmoker(features.getInt("smoker"));
             t.setPassengers(features.getInt("passengers"));
             t.setPrice(features.getInt("price"));
+            t.setDriver(trip.getString("driver"));
         }
         JSONObject sourceGeo = trip.getJSONObject("sourceGeo");
         JSONObject destinationGeo = trip.getJSONObject("destinationGeo");

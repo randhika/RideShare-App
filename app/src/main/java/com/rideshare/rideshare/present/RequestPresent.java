@@ -24,7 +24,7 @@ public class RequestPresent {
     private GeoCoderParser geoParser;
     private Trip trip;
     private TripManager tripManager;
-    private AsyncTask task;
+    private UpdateRequest task;
 
     public RequestPresent(RequestFragment parent, Trip trip) {
         this.parent = parent;
@@ -53,7 +53,10 @@ public class RequestPresent {
         trip.setTimeFrom(parent.getTimeFrom());
         trip.setTimeUntil(parent.getTimeUntil());
 
-        new UpdateRequest().execute(parent.getSource(), parent.getDestination());
+        if(task == null) {
+            task = new UpdateRequest();
+            task.execute(parent.getSource(), parent.getDestination());
+        }
     }
 
     private class UpdateRequest extends AsyncTask<String, Void, List<Geo>> {
@@ -121,6 +124,7 @@ public class RequestPresent {
 
         @Override
         protected void onPostExecute(AppResponse appResponse) {
+            task = null;
             if(appResponse.isValid() && appResponse.getStatus() == 200){
                 Toast.makeText(parent.getActivity(), "Request Updated", Toast.LENGTH_SHORT).show();
                 parent.toMyRides();

@@ -29,14 +29,10 @@ import com.rideshare.rideshare.view.dialog.TimePickerFragment;
 import java.util.ArrayList;
 
 public class TripPlannerFragment extends ListFragment implements View.OnClickListener,
-        View.OnFocusChangeListener, AdapterView.OnItemSelectedListener,
-        AdapterView.OnItemClickListener{
+        AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener{
 
     private final static int ADD_STOP_CODE = 100;
-    private final static int DATE_CODE = 101;
-    private static String USER_ID;
-
-    public View currentFocus;
+    private String USER_ID;
 
     private ArrayList<RideStop> stops;
     private AddStopAdapter adapter;
@@ -93,16 +89,6 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         tf.setOnClickListener(this);
         EditText tu = (EditText) view.findViewById(R.id.time_until);
         tu.setOnClickListener(this);
-        MaterialAutoCompleteTextView source =
-                (MaterialAutoCompleteTextView) view.findViewById(R.id.source);
-        source.setOnFocusChangeListener(this);
-        source.setOnItemClickListener(this);
-        MaterialAutoCompleteTextView destination =
-                (MaterialAutoCompleteTextView) view.findViewById(R.id.destination);
-        destination.setOnFocusChangeListener(this);
-        destination.setOnItemClickListener(this);
-        EditText price = (EditText) view.findViewById(R.id.price);
-        price.setOnFocusChangeListener(this);
 
         setSpinners(view);
         showRequestOptions();
@@ -155,11 +141,7 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
     @Override
     public void onDetach() {
         super.onDetach();
-    }
-
-    public void showError(String text){
-        TextView error = (TextView) getActivity().findViewById(R.id.error);
-        error.setText(text);
+        present.stopTasks();
     }
 
     @Override
@@ -193,14 +175,10 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
     }
 
     private void postRide() {
-        if(currentFocus != null)
-            onFocusChange(currentFocus, false);
         present.postRide();
     }
 
     private void postRequest() {
-        if(currentFocus != null)
-            onFocusChange(currentFocus, false);
         present.postRequest();
     }
 
@@ -222,7 +200,7 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         setListHeight();
     }
 
-    public void setListHeight(){
+    private void setListHeight(){
         ListView list = getListView();
         int height = 0;
 
@@ -251,11 +229,6 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
                     data.getStringExtra("price"), data.getStringExtra("time"));
             onAddStop(rideStop);
         }
-        if(requestCode == DATE_CODE){
-            int id = data.getIntExtra("id", -1);
-            if(id == -1) return;
-            present.changedValue(data.getStringExtra("text"), id);
-        }
     }
 
     public void setTime(View v) {
@@ -263,7 +236,7 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         Bundle args = new Bundle();
         args.putInt("id", v.getId());
         timePickerFragment.setArguments(args);
-        timePickerFragment.setTargetFragment(this, DATE_CODE);
+        timePickerFragment.setTargetFragment(this, 0);
         timePickerFragment.show(getFragmentManager(), "timePicker");
     }
 
@@ -272,7 +245,7 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         Bundle args = new Bundle();
         args.putInt("id", v.getId());
         datePickerFragment.setArguments(args);
-        datePickerFragment.setTargetFragment(this, DATE_CODE);
+        datePickerFragment.setTargetFragment(this, 0);
         datePickerFragment.show(getFragmentManager(), "datePicker");
     }
 
@@ -319,26 +292,10 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
     }
 
     @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if(hasFocus && v instanceof EditText){
-            currentFocus = v;
-        }
-        else if(!hasFocus && v instanceof EditText && !((EditText) v).getText().toString().equals("")){
-            present.changedValue(((EditText) v).getText().toString(), v.getId());
-        }
-    }
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {}
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if(position != 0 && view != null && view instanceof TextView) {
-            present.changedValue(((TextView) view).getText().toString(), parent.getId());
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+    public void onNothingSelected(AdapterView<?> parent) {}
 
     public void toMyRides() {
         ((NavigationActivity)getActivity()).selectItem(2, null);
@@ -369,5 +326,54 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         } else {
             ((EditText) getActivity().findViewById(R.id.destination)).setText("");
         }
+    }
+
+    public String getTimeFrom(){
+        return ((EditText) getActivity().findViewById(R.id.time_from)).getText().toString();
+    }
+
+    public String getDate(){
+        return ((EditText) getActivity().findViewById(R.id.date)).getText().toString();
+    }
+
+    public int getPrice(){
+        String price = ((EditText) getActivity().findViewById(R.id.price)).getText().toString();
+        return Integer.parseInt(price);
+    }
+
+    public String getTimeUntil(){
+        return ((EditText) getActivity().findViewById(R.id.time_until)).getText().toString();
+    }
+
+    public String getSource(){
+        return ((EditText) getActivity().findViewById(R.id.source)).getText().toString();
+    }
+
+    public String getDestination(){
+        return ((EditText) getActivity().findViewById(R.id.destination)).getText().toString();
+    }
+
+    public int getSmoker(){
+        Spinner spinner = ((Spinner)getActivity().findViewById(R.id.smoker));
+        return spinner.getSelectedItemPosition();
+    }
+
+    public int getBags(){
+        Spinner spinner = ((Spinner)getActivity().findViewById(R.id.bag));
+        return spinner.getSelectedItemPosition();
+    }
+
+    public int getPassengers(){
+        Spinner spinner = ((Spinner)getActivity().findViewById(R.id.passengers));
+        return spinner.getSelectedItemPosition();
+    }
+
+    public void error(String text) {
+        TextView error = (TextView) getActivity().findViewById(R.id.error);
+        error.setText(text);
+    }
+
+    public String getUID() {
+        return USER_ID;
     }
 }

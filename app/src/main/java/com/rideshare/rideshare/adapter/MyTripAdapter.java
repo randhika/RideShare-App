@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.rideshare.rideshare.R;
@@ -61,6 +63,10 @@ public class MyTripAdapter extends ArrayAdapter<Trip> {
         ((TextView) convertView.findViewById(R.id.status)).setText(status);
         ((TextView) convertView.findViewById(R.id.destination)).setText(destination);
         ((TextView) convertView.findViewById(R.id.time)).setText(time);
+
+        Animation animationY = new TranslateAnimation(0, 0, parent.getHeight() / 8, 0);
+        animationY.setDuration(300);
+        convertView.startAnimation(animationY);
 
         return convertView;
     }
