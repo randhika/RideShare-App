@@ -55,7 +55,7 @@ public class StopDialog extends DialogFragment implements View.OnClickListener,
         MaterialAutoCompleteTextView stopOverAddressView = (MaterialAutoCompleteTextView)
                 view.findViewById(R.id.stop_dialog_address);
         stopOverAddressView.setAdapter(
-                new GooglePlacesAutocompleteAdapter(view.getContext(), R.layout.autocomplete_item));
+                new GooglePlacesAutocompleteAdapter(view.getContext(), R.layout.autocomplete_item, R.id.item));
     }
 
     @Override

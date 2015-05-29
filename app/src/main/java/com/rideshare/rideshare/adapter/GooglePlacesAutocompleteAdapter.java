@@ -11,8 +11,8 @@ import com.rideshare.rideshare.service.AutoComplete;
 public class GooglePlacesAutocompleteAdapter extends ArrayAdapter implements Filterable {
     private ArrayList resultList;
 
-    public GooglePlacesAutocompleteAdapter(Context context, int textViewResourceId) {
-        super(context, textViewResourceId);
+    public GooglePlacesAutocompleteAdapter(Context context, int textViewResourceId, int item) {
+        super(context, textViewResourceId, item);
     }
 
     @Override

@@ -100,11 +100,11 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         MaterialAutoCompleteTextView sourceView = (MaterialAutoCompleteTextView) getActivity()
                 .findViewById(R.id.source);
         sourceView.setAdapter(
-                new GooglePlacesAutocompleteAdapter(getActivity(), R.layout.autocomplete_item));
+                new GooglePlacesAutocompleteAdapter(getActivity(), R.layout.autocomplete_item, R.id.item));
         MaterialAutoCompleteTextView destinationView = (MaterialAutoCompleteTextView) getActivity()
                 .findViewById(R.id.destination);
         destinationView.setAdapter(
-                new GooglePlacesAutocompleteAdapter(getActivity(), R.layout.autocomplete_item));
+                new GooglePlacesAutocompleteAdapter(getActivity(), R.layout.autocomplete_item, R.id.item));
     }
 
     private void setSpinners(View view) {
