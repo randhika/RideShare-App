@@ -10,20 +10,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.app.Activity;
-import android.content.Context;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.Toast;
-
-import com.rideshare.rideshare.R;
 
 public class AutoComplete{
 
@@ -33,7 +20,7 @@ public class AutoComplete{
     private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
     private static final String OUT_JSON = "/json";
     private static final String API_KEY = "AIzaSyApJ7Ap--UEFN7NA-isJlyeUYZENOIWvVw";
-
+    private static final int ITEMS_SIZE = 3;
     public static ArrayList autocomplete(String input) {
         ArrayList resultList = null;
         HttpURLConnection conn = null;
@@ -73,7 +60,7 @@ public class AutoComplete{
             JSONArray predsJsonArray = jsonObj.getJSONArray("predictions");
             // Extract the Place descriptions from the results
             resultList = new ArrayList(predsJsonArray.length());
-            for (int i = 0; i < predsJsonArray.length(); i++) {
+            for (int i = 0; i < ITEMS_SIZE/*predsJsonArray.length()*/; i++) {
                 System.out.println(predsJsonArray.getJSONObject(i).getString("description"));
                 System.out.println("============================================================");
                 resultList.add(predsJsonArray.getJSONObject(i).getString("description"));

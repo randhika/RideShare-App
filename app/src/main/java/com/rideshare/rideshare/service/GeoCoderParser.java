@@ -14,7 +14,7 @@ import org.json.JSONArray;
 
 public class GeoCoderParser {
 
-    private final static String URL_STRING = "http://geocoder.api.here.com/6.2/geocode.json";
+    private final static String URL_STRING = "https://maps.googleapis.com/maps/api/geocode/json";
     private final static String APP_ID = "8fNGZ0upEuk2LVVivpib";
     private final static String APP_CODE = "p0bM_QKAKYBR6vGohIB1_g";
 
@@ -27,7 +27,7 @@ public class GeoCoderParser {
         String full = "";
         try {
             String addressEncode = URLEncoder.encode(address, "UTF-8");
-            URL url = new URL(URL_STRING + "?app_id=" + APP_ID + "&app_code=" + APP_CODE + "&searchtext=" + addressEncode);
+            URL url = new URL( URL_STRING + "?address=" + addressEncode + "&sensor=false" );
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
@@ -53,24 +53,18 @@ public class GeoCoderParser {
         double longitude, latitude;
         try {
             JSONObject json = new JSONObject(fullResponse);
-            JSONArray jsonArr = json.getJSONObject("Response").getJSONArray("View");
+            JSONArray jsonArr = json.getJSONArray("results");
             if(jsonArr.length() == 0){
-                //throw new Error("empty first array");
                 return null;
             }
-            jsonArr = jsonArr.getJSONObject(0).getJSONArray("Result");
-            if(jsonArr.length() == 0){
-                //throw new Error("empty second array");
-                return null;
-            }
-            json = jsonArr.getJSONObject(0).getJSONObject("Location").getJSONObject("DisplayPosition");
-            latitude = json.getDouble("Latitude");
-            longitude = json.getDouble("Longitude");
+            json = jsonArr.getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
+            latitude = json.getDouble("lat");
+            longitude = json.getDouble("lng");
+            System.out.println(latitude);
+            System.out.println(longitude);
         } catch (JSONException e){
-            //e.printStackTrace();
             return null;
         }
         return new Geo(longitude, latitude);
     }
-
 }
