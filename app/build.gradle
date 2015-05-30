@@ -3,7 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "20.0.0"
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "com.rideshare.rideshare"
@@ -25,6 +25,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.rengwuxian.materialedittext:library:1.8.3'
     compile 'com.github.navasmdc:MaterialDesign:1.4'
-    compile "com.google.android.gms:play-services:7.5.0"
+    compile "com.google.android.gms:play-services:7.5.+"
     compile 'com.hannesdorfmann.smoothprogressbar:library:1.0.0'
 }

@@ -6,7 +6,7 @@ import org.json.JSONObject;
 
 public class IdManager extends Manager {
 
-    private final static String REGISTRATION_URI = "account";
+    private final static String ACCOUNT_URI = "account";
     private final static String LOGIN_URI = "account/authenticate";
     private final static String NOTIFICATION_URI = "notification";
 
@@ -30,7 +30,7 @@ public class IdManager extends Manager {
                                     AppResponse appResponse){
         JSONObject registrationJSON;
 
-        String url = buildUrl(REGISTRATION_URI);
+        String url = buildUrl(ACCOUNT_URI);
         try {
             registrationJSON = registrationJsonBuilder(fullName, email, phone, password);
             httpHandler.postJSON(registrationJSON, url, appResponse);
@@ -71,6 +71,11 @@ public class IdManager extends Manager {
         registrationJSON.accumulate("password", password);
         registrationJSON.accumulate("source", "app");
         return registrationJSON;
+    }
+
+    public void updateUser(JSONObject json, AppResponse result) {
+        String url = buildUrl(ACCOUNT_URI);
+        httpHandler.putJSON(json, url, result);
     }
 
     private String buildUrl(String path){

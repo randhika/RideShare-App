@@ -4,9 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="**my_app_package**.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.rideshare.rideshare.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <permission android:name="com.rideshare.rideshare.permission.C2D_MESSAGE" />
+    <permission android:name="com.rideshare.rideshare.permission.C2D_MESSAGE"
+        android:protectionLevel="signature"/>
 
     <application
         android:allowBackup="true"
@@ -30,6 +31,29 @@
             android:name=".view.activity.NavigationActivity"
             android:label="@string/title_activity_navigation" >
         </activity>
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="com.rideshare.rideshare" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="com.rideshare.rideshare.gcm.RideShareGcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.rideshare.rideshare.gcm.RideShareInstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

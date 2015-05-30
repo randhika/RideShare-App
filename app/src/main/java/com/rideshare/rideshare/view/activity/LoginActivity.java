@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.rideshare.rideshare.R;
 import com.rideshare.rideshare.entity.app.Notification;
+import com.rideshare.rideshare.gcm.RideShareGcmListenerService;
+import com.rideshare.rideshare.gcm.RideShareInstanceIDListenerService;
 import com.rideshare.rideshare.present.LoginPresent;
 import com.rideshare.rideshare.utils.DateHandler;
 import com.rideshare.rideshare.utils.Security;
@@ -65,6 +67,11 @@ public class LoginActivity extends FragmentActivity {
     public void enterApp(String userId, String notificationStr){
         if(userId != null)
             saveLoginInfo(userId);
+        Intent serviceIntent = new Intent(this, RideShareInstanceIDListenerService.class);
+        serviceIntent.putExtra("USER", userId);
+        startService(serviceIntent);
+        Intent serviceNotifications = new Intent(this, RideShareGcmListenerService.class);
+        startService(serviceNotifications);
         Intent intent = new Intent(this, NavigationActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("USER", userId);
