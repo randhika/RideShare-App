@@ -34,10 +34,12 @@ public class AddStopAdapter extends ArrayAdapter<RideStop>{
             convertView = LayoutInflater.from(getContext()).inflate(resource, parent, false);
         }
 
-        String address = "Stop " + position + ": " + rideStop.getAddress();
-        String price = "Price until destination: " + rideStop.getPrice();
-        String time = "Time to arrive: " + rideStop.getTime();
+        String address = rideStop.getAddress();
+        String positionStr = "Stop " + position;
+        String price = "Price Until Destination: " + rideStop.getPrice() + " NIS";
+        String time = "Time to Destination: " + rideStop.getTime() + " Minuets";
 
+        ((TextView) convertView.findViewById(R.id.list_stop_number)).setText(positionStr);
         ((TextView) convertView.findViewById(R.id.list_stop_address)).setText(address);
         ((TextView) convertView.findViewById(R.id.list_stop_price)).setText(price);
         ((TextView) convertView.findViewById(R.id.list_stop_time)).setText(time);

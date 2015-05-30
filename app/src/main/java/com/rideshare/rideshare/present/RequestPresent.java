@@ -39,14 +39,14 @@ public class RequestPresent {
         int smokerOption = parent.getSmoker();
 
         switch (bagOption){
-            case(1): trip.setBag(1);
-            case(2): trip.setBag(2);
+            case(1): trip.setBag(1); break;
+            case(2): trip.setBag(2); break;
         }
 
         switch (smokerOption){
-            case(1): trip.setSmoker(3);
-            case(2): trip.setSmoker(1);
-            case(3): trip.setSmoker(2);
+            case(1): trip.setSmoker(3); break;
+            case(2): trip.setSmoker(1); break;
+            case(3): trip.setSmoker(2); break;
         }
 
         trip.setDate(parent.getDate());

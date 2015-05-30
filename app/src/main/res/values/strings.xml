@@ -89,5 +89,16 @@
     <string name="remove">Remove</string>
     <string name="update">Update</string>
     <string name="update_request">Update Request</string>
+    <string name="rideDate">Ride Date</string>
+    <string name="seatsLeft">Seats Left</string>
+    <string name="driver">Driver</string>
+    <string name="driver_phone">Driver Phone</string>
+    <string name="driverName">Driver Name</string>
+    <string name="driver_rating">Driver Rating</string>
+    <string name="suggestionDate">Suggestion Date</string>
+    <string name="carDetails">Car Details</string>
+    <string name="partOfRide">Part of Ride</string>
+    <string name="joinRide">Join Ride</string>
+    <string name="rideTime">Ride Time</string>
 
 </resources>

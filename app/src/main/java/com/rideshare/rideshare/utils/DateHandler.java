@@ -3,6 +3,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 public class DateHandler{
@@ -58,6 +59,15 @@ public class DateHandler{
         int hours = Integer.parseInt(params[0]) * 3600;
         int minuets = Integer.parseInt(params[1]) * 60;
         return hours + minuets;
+    }
+
+    public static String getDate(String ISODate) throws ParseException {
+        DateFormat ISOFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+                Locale.getDefault());
+        DateFormat viewFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm",
+                Locale.getDefault());
+        Date date = ISOFormat.parse(ISODate);
+        return viewFormat.format(date);
     }
 }
 

@@ -100,7 +100,8 @@ public class MyRidesFragment extends ListFragment {
                 (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         if(item.getGroupId() == 1){
             switch(item.getOrder()){
-                case(1): updateRequest(info.position);
+                case(1): updateRequest(info.position); break;
+                case(2): viewSuggestions(info.position); break;
             }
         } else if(item.getGroupId() == 2){
 
@@ -118,9 +119,9 @@ public class MyRidesFragment extends ListFragment {
             menu.add(1, v.getId(), 1, "Update Request");
             switch (trip.getStatus()){
                 case(0): menu.add(1, v.getId(), 2, "View Suggestions");
-                    menu.add(1, v.getId(), 0, "Delete Request"); break;
+                    menu.add(1, v.getId(), 5, "Delete Request"); break;
                 case(1): menu.add(1, v.getId(), 3, "View Approved Ride");
-                    menu.add(1, v.getId(), 0, "Delete Request"); break;
+                    menu.add(1, v.getId(), 5, "Delete Request"); break;
                 case(2): menu.add(1, v.getId(), 4, "Rank Driver"); break;
             }
         } else {
@@ -145,5 +146,12 @@ public class MyRidesFragment extends ListFragment {
         } catch (JSONException e) {
             Log.e("updateRequest", "JSONException", e);
         }
+    }
+
+    private void viewSuggestions(int position) {
+        Bundle bundle = new Bundle();
+        Trip trip = trips.get(position);
+        bundle.putString("REQUEST_ID", trip.getId());
+        ((NavigationActivity) getActivity()).selectItem(11, bundle);
     }
 }

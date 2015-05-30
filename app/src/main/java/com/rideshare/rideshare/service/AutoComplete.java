@@ -60,9 +60,9 @@ public class AutoComplete{
             JSONArray predsJsonArray = jsonObj.getJSONArray("predictions");
             // Extract the Place descriptions from the results
             resultList = new ArrayList(predsJsonArray.length());
-            for (int i = 0; i < ITEMS_SIZE/*predsJsonArray.length()*/; i++) {
-                System.out.println(predsJsonArray.getJSONObject(i).getString("description"));
-                System.out.println("============================================================");
+            for (int i = 0; i < predsJsonArray.length(); i++) {
+                //System.out.println(predsJsonArray.getJSONObject(i).getString("description"));
+                //System.out.println("============================================================");
                 resultList.add(predsJsonArray.getJSONObject(i).getString("description"));
             }
         } catch (JSONException e) {

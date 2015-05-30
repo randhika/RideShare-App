@@ -127,11 +127,6 @@ public class TripPlannerPresent {
         @Override
         protected List<Geo> doInBackground(String... params) {
             Geo sourceInfo = geoParser.sendAddress(params[0]);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                Log.e("GeoFinder", "SLEEP", e);
-            }
             Geo destinationInfo = geoParser.sendAddress(params[1]);
 
             ArrayList<Geo> geos = new ArrayList<>();

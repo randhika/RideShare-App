@@ -94,6 +94,9 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         showRequestOptions();
         setListHeight();
         setAutoComplete();
+
+        ListView listView = getListView();
+        listView.setDivider(null);
     }
 
     private void setAutoComplete() {
@@ -207,7 +210,7 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         for (int i = 0; i < stops.size(); i++){
             View item = adapter.getView(i, null, list);
             item.measure(0, 0);
-            height += item.getMeasuredHeight();
+            height += item.getMeasuredHeight() + 30;
         }
 
         ViewGroup.LayoutParams params = list.getLayoutParams();

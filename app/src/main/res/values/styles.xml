@@ -12,6 +12,7 @@
     <color name="error">#E64C66</color>
     <color name="warning">#FFD069</color>
     <color name="gray_light">#E3E3E3</color>
+    <color name="gray_soft">#CACACA</color>
     <color name="gray">#AEAEAE</color>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -36,12 +37,17 @@
     </style>
 
     <style name="RideShareEditText">
-
     </style>
 
     <style name="RideShareText">
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/text</item>
+    </style>
+
+    <style name="RideShareTextTagOrange" parent="RideShareText">
+        <item name="android:textColor">@color/text</item>
+        <item name="android:background">@color/warning</item>
+        <item name="android:padding">3dp</item>
     </style>
 
     <style name="RideShareTextSecondary">
@@ -51,6 +57,10 @@
 
     <style name="RideShareTextSecondaryLight" parent="RideShareTextSecondary">
         <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="RideShareTextSecondaryTitle" parent="RideShareTextSecondary">
+        <item name="android:textSize">13sp</item>
     </style>
 
     <style name="RideShareTextSecondarySmall">
@@ -65,6 +75,7 @@
 
     <style name="RideShareTextError" parent="RideShareText">
         <item name="android:textColor">@color/error</item>
+        <item name="android:weightSum">3</item>
     </style>
 
     <style name="RideShareTextWaitingSelect" parent="RideShareText">
@@ -110,6 +121,13 @@
         <item name="android:textColor">@color/highlight</item>
     </style>
 
+    <style name="RideShareFlatButtonSmall" parent="RideShareFlatButton">
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:minWidth">20dp</item>
+    </style>
+
     <style name="RideShareTransparentButton" parent="RideShareFlatButton">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textColor">@color/highlight</item>
@@ -118,6 +136,12 @@
     <style name="RideShareSpinner" parent="Base.Widget.AppCompat.DropDownItem.Spinner">
         <item name="android:textAppearance">@color/text</item>
         <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="RideShareRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/star_full</item>
+        <item name="android:minHeight">25dip</item>
+        <item name="android:maxHeight">25dip</item>
     </style>
 
 </resources>

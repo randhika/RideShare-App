@@ -1,38 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/list_stop_address"
+    <GridLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/RideShareText"/>
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:alignmentMode="alignBounds"
+        android:background="@drawable/item_orange_border">
 
-    <TextView
-        android:id="@+id/list_stop_price"
-        android:layout_below="@id/list_stop_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/RideShareTextSecondarySmall"/>
+        <TextView
+            android:id="@+id/list_stop_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/RideShareTextTagOrange"/>
 
-    <TextView
-        android:id="@+id/list_stop_time"
-        android:layout_below="@id/list_stop_address"
-        android:layout_toRightOf="@id/list_stop_price"
-        android:paddingLeft="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/RideShareTextSecondarySmall"/>
+        <ImageButton
+            android:id="@+id/list_delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:padding="3dp"
+            android:src="@drawable/ic_navigation_close"/>
 
-    <ImageButton
-        android:id="@+id/list_delete_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:layout_alignParentRight="true"
-        android:padding="10dp"
-        android:src="@drawable/ic_navigation_close"/>
+        <TextView
+            android:id="@+id/list_stop_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="false"
+            android:maxLines="3"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:paddingLeft="3dp"
+            android:paddingTop="5dp"
+            style="@style/RideShareText"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/list_stop_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_row="2"
+            android:paddingLeft="3dp"
+            android:paddingTop="5dp"
+            style="@style/RideShareTextSecondarySmall"/>
+
+        <TextView
+            android:id="@+id/list_stop_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:paddingLeft="3dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            style="@style/RideShareTextSecondarySmall"/>
+
+    </GridLayout>
+</LinearLayout>

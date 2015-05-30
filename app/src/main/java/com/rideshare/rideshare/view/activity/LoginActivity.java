@@ -13,9 +13,11 @@ import android.widget.TextView;
 import com.rideshare.rideshare.R;
 import com.rideshare.rideshare.entity.app.Notification;
 import com.rideshare.rideshare.present.LoginPresent;
+import com.rideshare.rideshare.utils.DateHandler;
 import com.rideshare.rideshare.utils.Security;
 import com.rideshare.rideshare.view.dialog.WaitDialog;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class LoginActivity extends FragmentActivity {

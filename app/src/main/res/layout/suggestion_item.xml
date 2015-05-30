@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_border">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0">
+
+        <TextView
+            android:id="@+id/suggestion_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:padding="3dp"
+            android:layout_marginBottom="5dp"
+            style="@style/RideShareTextTitle"/>
+
+        <TextView
+            android:id="@+id/suggestion_part_of_ride"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:layout_margin="4dp"
+            android:text="@string/partOfRide"
+            android:layout_gravity="end"
+            style="@style/RideShareTextTagOrange"
+            android:textSize="13sp"/>
+
+    </GridLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:padding="3dp"
+        android:text="@string/source"
+        style="@style/RideShareTextSecondaryTitle"/>
+
+    <TextView
+        android:id="@+id/suggestion_source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:padding="3dp"
+        style="@style/RideShareText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="3"
+        android:layout_column="0"
+        android:padding="3dp"
+        android:text="@string/destination"
+        style="@style/RideShareTextSecondaryTitle"/>
+
+    <TextView
+        android:id="@+id/suggestion_destination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="4"
+        android:layout_column="0"
+        android:padding="3dp"
+        style="@style/RideShareText"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:text="@string/rideTime"
+        android:layout_row="5"
+        android:layout_column="0"
+        style="@style/RideShareTextSecondaryTitle"/>
+
+    <TextView
+        android:id="@+id/suggestion_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_row="6"
+        android:layout_column="0"
+        style="@style/RideShareText"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="7"
+        android:layout_column="0">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="0"
+            android:layout_row="0"
+            android:text="@string/price"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView
+            android:id="@+id/suggestion_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="1"
+            android:layout_row="0"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="0"
+            android:layout_row="1"
+            android:text="@string/smoker"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView
+            android:id="@+id/suggestion_smoker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="1"
+            android:layout_row="1"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="0"
+            android:layout_row="2"
+            android:text="@string/seatsLeft"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView
+            android:id="@+id/suggestion_seats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="1"
+            android:layout_row="2"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="3"
+            android:layout_row="0"
+            android:text="@string/driverName"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView
+            android:id="@+id/suggestion_driver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="4"
+            android:layout_row="0"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="3"
+            android:layout_row="1"
+            android:text="@string/driver_phone"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView
+            android:id="@+id/suggestion_driver_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="4"
+            android:layout_row="1"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="3"
+            android:layout_row="2"
+            android:text="@string/driver_rating"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <RatingBar android:id="@+id/suggestion_driver_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:layout_marginBottom="5dp"
+            android:layout_column="4"
+            android:layout_row="2"
+            android:numStars="5"
+            android:stepSize="1.0"
+            style="@style/RideShareRatingBar"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_row="5"
+            android:text="@string/carDetails"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView android:id="@+id/suggestion_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="3"
+            android:layout_columnSpan="2"
+            android:layout_row="5"
+            style="@style/RideShareTextSecondary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:layout_row="6"
+            android:text="@string/suggestionDate"
+            style="@style/RideShareTextSecondaryTitle"/>
+
+        <TextView android:id="@+id/suggestion_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="3"
+            android:layout_columnSpan="2"
+            android:layout_row="6"
+            style="@style/RideShareTextSecondary"/>
+
+    </GridLayout>
+
+    <Button android:id="@+id/suggestion_join_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_row="8"
+        android:layout_gravity="end"
+        android:text="@string/joinRide"
+        style="@style/RideShareFlatButtonSmall"/>
+</GridLayout>
