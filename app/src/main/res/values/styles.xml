@@ -128,6 +128,11 @@
         <item name="android:minWidth">20dp</item>
     </style>
 
+    <style name="RideShareFlatButtonSmallRemove" parent="RideShareFlatButtonSmall">
+        <item name="android:background">@color/error</item>
+        <item name="android:textColor">@color/gray_light</item>
+    </style>
+
     <style name="RideShareTransparentButton" parent="RideShareFlatButton">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textColor">@color/highlight</item>

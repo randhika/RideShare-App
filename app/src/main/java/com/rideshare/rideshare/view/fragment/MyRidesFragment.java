@@ -104,7 +104,9 @@ public class MyRidesFragment extends ListFragment {
                 case(2): viewSuggestions(info.position); break;
             }
         } else if(item.getGroupId() == 2){
-
+            switch(item.getOrder()){
+                case(1): viewRiders(info.position); break;
+            }
         }
         return false;
     }
@@ -128,7 +130,7 @@ public class MyRidesFragment extends ListFragment {
             switch (trip.getStatus()){
                 case(0): menu.add(2, v.getId(), 1, "See Passengers Details");
                     menu.add(2, v.getId(), 4, "Delete Ride"); break;
-                case(1): menu.add(2, v.getId(), 2, "See Passengers Details");
+                case(1): menu.add(2, v.getId(), 1, "See Passengers Details");
                     menu.add(2, v.getId(), 4, "Delete Ride"); break;
                 case(2): menu.add(2, v.getId(), 3, "Rank Passengers"); break;
             }
@@ -153,5 +155,12 @@ public class MyRidesFragment extends ListFragment {
         Trip trip = trips.get(position);
         bundle.putString("REQUEST_ID", trip.getId());
         ((NavigationActivity) getActivity()).selectItem(11, bundle);
+    }
+
+    private void viewRiders(int position) {
+        Bundle bundle = new Bundle();
+        Trip trip = trips.get(position);
+        bundle.putString("RIDE_ID", trip.getId());
+        ((NavigationActivity) getActivity()).selectItem(12, bundle);
     }
 }

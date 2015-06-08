@@ -9,7 +9,8 @@ public class TripManager extends Manager {
     private final static String REQUEST_URI = "request";
     private final static String MY_RIDES_URI = "trips";
     private final static String GET_SUGGESTIONS = "request/suggestions";
-    private final static String ADD_TO_WATING_LIST = "ride/waiting";
+    private final static String ADD_TO_WAITING_LIST = "ride/waiting";
+    private final static String GET_RIDERS = "ride/riders";
 
     public TripManager(){
         super();
@@ -40,8 +41,13 @@ public class TripManager extends Manager {
         httpHandler.getJSON(url, appResponse);
     }
 
+    public void getRiders(String rideID, AppResponse appResponse){
+        String url = buildUrl(GET_RIDERS) + "?ride=" + rideID;
+        httpHandler.getJSON(url, appResponse);
+    }
+
     public void addToWaitingList(JSONObject json, AppResponse appResponse) {
-        String url = buildUrl(ADD_TO_WATING_LIST);
+        String url = buildUrl(ADD_TO_WAITING_LIST);
         httpHandler.postJSON(json, url, appResponse);
     }
 

@@ -100,5 +100,9 @@
     <string name="partOfRide">Part of Ride</string>
     <string name="joinRide">Join Ride</string>
     <string name="rideTime">Ride Time</string>
+    <string name="add_to_passengers">Add to Passengers List</string>
+    <string name="rem_from_passengers">Remove from Passengers List</string>
+    <string name="rem_from_ride">Remove from Ride</string>
+    <string name="add_to_ride">Add to Ride</string>
 
 </resources>
