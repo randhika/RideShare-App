@@ -32,8 +32,16 @@ public class Suggestion {
     public static Suggestion fromJSON(JSONObject json) throws JSONException, ParseException {
         Suggestion suggestion = new Suggestion();
 
-        JSONObject driver = json.getJSONObject("ride").getJSONObject("driver");
-        JSONObject ride = json.getJSONObject("ride");
+        JSONObject driver, ride;
+
+        if(json.has("ride")){
+            driver = json.getJSONObject("ride").getJSONObject("driver");
+            ride = json.getJSONObject("ride");
+        } else {
+            ride = json;
+            driver = ride.getJSONObject("driver");
+        }
+
 
         suggestion.driver = driver.getString("fullName");
         suggestion.driverRank = driver.getJSONObject("rating").getString("driver");
@@ -63,8 +71,10 @@ public class Suggestion {
         }
         suggestion.car = car;
         suggestion.suggestionDate = DateHandler.getDate(json.getString("created"));
-        suggestion.requestID = json.getString("request");
-        suggestion.userID = json.getString("user");
+        if(json.has("request"))
+            suggestion.requestID = json.getString("request");
+        if(json.has("user"))
+            suggestion.userID = json.getString("user");
         suggestion.rideID = ride.getString("_id");
         return suggestion;
     }

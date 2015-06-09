@@ -1,6 +1,7 @@
 package com.rideshare.rideshare.manager;
 
 import com.rideshare.rideshare.communication.Http;
+import com.rideshare.rideshare.entity.AppResponse;
 
 public abstract class Manager {
 
@@ -16,4 +17,6 @@ public abstract class Manager {
     public String buildUrl(String host, String path){
         return host + path;
     }
+
+
 }

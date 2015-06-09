@@ -133,6 +133,20 @@
         <item name="android:textColor">@color/gray_light</item>
     </style>
 
+    <style name="RideShareOptionDelete" parent="RideShareFlatButtonSmallRemove">
+        <item name="android:padding">4dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="RideShareOption" parent="RideShareFlatButtonSmall">
+        <item name="android:padding">4dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="RideShareTransparentButton" parent="RideShareFlatButton">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textColor">@color/highlight</item>
@@ -145,8 +159,8 @@
 
     <style name="RideShareRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/star_full</item>
-        <item name="android:minHeight">25dip</item>
-        <item name="android:maxHeight">25dip</item>
+        <item name="android:minHeight">15dip</item>
+        <item name="android:maxHeight">15dip</item>
     </style>
 
 </resources>

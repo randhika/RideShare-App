@@ -103,8 +103,11 @@ public class SuggestionPresent {
             if(!result.isValid()){
                 return;
             }
-            if(result.getStatus() == 200){
+            if(result.getStatus() == 200) {
                 Toast.makeText(parent.getActivity(), "Joined to Ride", Toast.LENGTH_SHORT).show();
+            } else if(result.getStatus() == 404){
+                Toast.makeText(parent.getActivity(), "Already Added to Ride", Toast.LENGTH_SHORT)
+                        .show();
             } else {
                 Toast.makeText(parent.getActivity(), "Failed Joined to Ride", Toast.LENGTH_SHORT)
                         .show();

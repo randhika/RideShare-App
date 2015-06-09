@@ -17,7 +17,7 @@
             android:layout_column="0">
 
             <TextView
-                android:id="@+id/suggestion_head"
+                android:id="@+id/head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="0"
@@ -27,7 +27,7 @@
                 style="@style/RideShareTextTitle"/>
 
             <TextView
-                android:id="@+id/suggestion_part_of_ride"
+                android:id="@+id/part_of_ride"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
@@ -51,7 +51,7 @@
             style="@style/RideShareTextSecondaryTitle"/>
 
         <TextView
-            android:id="@+id/suggestion_source"
+            android:id="@+id/source"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="2"
@@ -69,7 +69,7 @@
             style="@style/RideShareTextSecondaryTitle"/>
 
         <TextView
-            android:id="@+id/suggestion_destination"
+            android:id="@+id/destination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="4"
@@ -87,7 +87,7 @@
             style="@style/RideShareTextSecondaryTitle"/>
 
         <TextView
-            android:id="@+id/suggestion_time"
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="3dp"
@@ -111,7 +111,7 @@
                 style="@style/RideShareTextSecondaryTitle"/>
 
             <TextView
-                android:id="@+id/suggestion_price"
+                android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
@@ -129,7 +129,7 @@
                 style="@style/RideShareTextSecondaryTitle"/>
 
             <TextView
-                android:id="@+id/suggestion_smoker"
+                android:id="@+id/smoker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
@@ -147,7 +147,7 @@
                 style="@style/RideShareTextSecondaryTitle"/>
 
             <TextView
-                android:id="@+id/suggestion_seats"
+                android:id="@+id/seats"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
@@ -165,7 +165,7 @@
                 style="@style/RideShareTextSecondaryTitle"/>
 
             <TextView
-                android:id="@+id/suggestion_driver_name"
+                android:id="@+id/driver_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
@@ -183,7 +183,7 @@
                 style="@style/RideShareTextSecondaryTitle"/>
 
             <TextView
-                android:id="@+id/suggestion_driver_phone"
+                android:id="@+id/driver_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
@@ -200,7 +200,7 @@
                 android:text="@string/driver_rating"
                 style="@style/RideShareTextSecondaryTitle"/>
 
-            <RatingBar android:id="@+id/suggestion_driver_rating"
+            <RatingBar android:id="@+id/driver_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:isIndicator="true"
@@ -223,7 +223,7 @@
                 android:text="@string/carDetails"
                 style="@style/RideShareTextSecondaryTitle"/>
 
-            <TextView android:id="@+id/suggestion_car"
+            <TextView android:id="@+id/car"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
@@ -242,7 +242,7 @@
                 android:text="@string/suggestionDate"
                 style="@style/RideShareTextSecondaryTitle"/>
 
-            <TextView android:id="@+id/suggestion_date"
+            <TextView android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
@@ -253,13 +253,13 @@
 
         </GridLayout>
 
-        <Button android:id="@+id/suggestion_join_btn"
+        <Button android:id="@+id/remove_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_row="8"
             android:layout_gravity="end"
-            android:text="@string/joinRide"
-            style="@style/RideShareOption"/>
+            android:text="@string/remove_from_ride"
+            style="@style/RideShareOptionDelete"/>
     </GridLayout>
 </LinearLayout>

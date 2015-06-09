@@ -9,8 +9,10 @@ public class TripManager extends Manager {
     private final static String REQUEST_URI = "request";
     private final static String MY_RIDES_URI = "trips";
     private final static String GET_SUGGESTIONS = "request/suggestions";
-    private final static String ADD_TO_WAITING_LIST = "ride/waiting";
+    private final static String WAITING_LIST = "ride/waiting";
     private final static String GET_RIDERS = "ride/riders";
+    private final static String PASSENGER_LIST = "ride/approve";
+    private final static String CONNECTED_RIDES = "request/rides";
 
     public TripManager(){
         super();
@@ -47,11 +49,39 @@ public class TripManager extends Manager {
     }
 
     public void addToWaitingList(JSONObject json, AppResponse appResponse) {
-        String url = buildUrl(ADD_TO_WAITING_LIST);
+        String url = buildUrl(WAITING_LIST);
         httpHandler.postJSON(json, url, appResponse);
+    }
+
+    public void addToPassengerList(JSONObject json, AppResponse appResponse) {
+        String url = buildUrl(PASSENGER_LIST);
+        httpHandler.postJSON(json, url, appResponse);
+    }
+
+    public void removeFromPassengerList(String rideID, String requestID, String userID,
+                                        AppResponse appResponse) {
+        String url = buildUrl(PASSENGER_LIST);
+        url += "?user=" + userID;
+        url += "&request=" + requestID;
+        url += "&ride=" + rideID;
+        httpHandler.deleteJSON(url, appResponse);
     }
 
     private String buildUrl(String path){
         return super.buildUrl(APPLICATION_URL, path);
+    }
+
+    public void removeFromWaitingList(String rideID, String requestID, String userID,
+                                     AppResponse appResponse) {
+        String url = buildUrl(WAITING_LIST);
+        url += "?user=" + userID;
+        url += "&request=" + requestID;
+        url += "&ride=" + rideID;
+        httpHandler.deleteJSON(url, appResponse);
+    }
+
+    public void getConnectedRides(String user, AppResponse appResponse) {
+        String url = buildUrl(CONNECTED_RIDES) + "?user=" + user;
+        httpHandler.getJSON(url, appResponse);
     }
 }

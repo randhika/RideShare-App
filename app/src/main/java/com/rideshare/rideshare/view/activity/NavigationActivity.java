@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.rideshare.rideshare.R;
+import com.rideshare.rideshare.view.fragment.ConnectedRidesFragment;
 import com.rideshare.rideshare.view.fragment.MyRidesFragment;
 import com.rideshare.rideshare.view.fragment.NotificationFragment;
 import com.rideshare.rideshare.view.fragment.PassengersDetailsFragment;
@@ -91,6 +92,7 @@ public class NavigationActivity extends FragmentActivity {
                 case(10): setTitle("Update request"); break;
                 case(11): setTitle("Suggestions"); break;
                 case(12): setTitle("Passengers Details"); break;
+                case(13): setTitle("Connected Rides"); break;
             }
         }
         drawerLayout.closeDrawer(drawerList);
@@ -117,6 +119,8 @@ public class NavigationActivity extends FragmentActivity {
                 return SuggestionFragment.newInstance(args);
             case 12:
                 return PassengersDetailsFragment.newInstance(args);
+            case 13:
+                return ConnectedRidesFragment.newInstance(args);
         }
         // Default value should never come to this point
         return NotificationFragment.newInstance(args);

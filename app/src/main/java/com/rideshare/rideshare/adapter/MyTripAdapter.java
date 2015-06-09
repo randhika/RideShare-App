@@ -59,6 +59,7 @@ public class MyTripAdapter extends ArrayAdapter<Trip> {
         String source = "Source: " + trip.getSource();
         String time = trip.getDate() + " " + trip.getTimeFrom() + " - " + trip.getTimeUntil();
 
+        ((TextView) convertView.findViewById(R.id.header)).setText(trip.getType());
         ((TextView) convertView.findViewById(R.id.source)).setText(source);
         ((TextView) convertView.findViewById(R.id.status)).setText(status);
         ((TextView) convertView.findViewById(R.id.destination)).setText(destination);

@@ -102,6 +102,8 @@ public class MyRidesFragment extends ListFragment {
             switch(item.getOrder()){
                 case(1): updateRequest(info.position); break;
                 case(2): viewSuggestions(info.position); break;
+                case(3): viewConnectedRides(info.position); break;
+                case(5): viewConnectedRides(info.position); break;
             }
         } else if(item.getGroupId() == 2){
             switch(item.getOrder()){
@@ -121,9 +123,10 @@ public class MyRidesFragment extends ListFragment {
             menu.add(1, v.getId(), 1, "Update Request");
             switch (trip.getStatus()){
                 case(0): menu.add(1, v.getId(), 2, "View Suggestions");
-                    menu.add(1, v.getId(), 5, "Delete Request"); break;
+                    menu.add(1, v.getId(), 5, "View Waiting to Approved Rides");
+                    menu.add(1, v.getId(), 6, "Delete Request"); break;
                 case(1): menu.add(1, v.getId(), 3, "View Approved Ride");
-                    menu.add(1, v.getId(), 5, "Delete Request"); break;
+                    menu.add(1, v.getId(), 6, "Delete Request"); break;
                 case(2): menu.add(1, v.getId(), 4, "Rank Driver"); break;
             }
         } else {
@@ -162,5 +165,14 @@ public class MyRidesFragment extends ListFragment {
         Trip trip = trips.get(position);
         bundle.putString("RIDE_ID", trip.getId());
         ((NavigationActivity) getActivity()).selectItem(12, bundle);
+    }
+
+    private void viewConnectedRides(int position) {
+        Bundle bundle = new Bundle();
+        Trip trip = trips.get(position);
+        bundle.putString("REQUEST_ID", trip.getId());
+        bundle.putString("USER_ID", USER_ID);
+        bundle.putInt("REQUEST_STATUS", trip.getStatus());
+        ((NavigationActivity) getActivity()).selectItem(13, bundle);
     }
 }

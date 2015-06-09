@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -42,11 +43,39 @@ public class RidersAdapter extends ArrayAdapter<Rider> {
         } else {
             ((TextView) convertView.findViewById(R.id.header)).setText("Passenger");
             convertView.findViewById(R.id.add_passenger).setVisibility(View.INVISIBLE);
+            convertView.findViewById(R.id.del_waiting_passenger).setVisibility(View.INVISIBLE);
         }
 
         ((TextView) convertView.findViewById(R.id.name)).setText(rider.getFullName());
         ((TextView) convertView.findViewById(R.id.phone)).setText(rider.getPhone());
         ((RatingBar) convertView.findViewById(R.id.rating)).setNumStars(rider.getRating());
+
+        (convertView.findViewById(R.id.add_passenger)).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        present.addPassenger(rider);
+                    }
+                }
+        );
+
+        (convertView.findViewById(R.id.del_passenger)).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        present.removePassenger(rider);
+                    }
+                }
+        );
+
+        (convertView.findViewById(R.id.del_waiting_passenger)).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        present.removeWaitingUser(rider);
+                    }
+                }
+        );
 
         return convertView;
     }
