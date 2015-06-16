@@ -13,6 +13,19 @@
         android:background="@drawable/item_border">
 
         <TextView
+            android:id="@+id/bags_rider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:layout_column="4"
+            android:layout_row="0"
+            android:layout_margin="4dp"
+            android:text="@string/has_big_bag"
+            android:layout_gravity="end"
+            style="@style/RideShareTextTagOrange"
+            android:textSize="13sp"/>
+
+        <TextView
             android:id="@+id/header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,6 +108,48 @@
             android:stepSize="1.0"
             style="@style/RideShareRatingBar"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/RideShareTextSecondaryTitle"
+            android:layout_row="5"
+            android:layout_marginTop="10dp"
+            android:layout_column="0"
+            android:layout_columnSpan="5"
+            android:padding="3dp"
+            android:text="@string/source"/>
+
+        <TextView
+            android:id="@+id/source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/RideShareTextSecondary"
+            android:paddingLeft="3dp"
+            android:layout_row="6"
+            android:layout_columnSpan="5"
+            android:layout_column="0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/RideShareTextSecondaryTitle"
+            android:layout_row="7"
+            android:layout_marginTop="10dp"
+            android:layout_column="0"
+            android:layout_columnSpan="5"
+            android:padding="3dp"
+            android:text="@string/destination"/>
+
+        <TextView
+            android:id="@+id/destination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/RideShareTextSecondary"
+            android:paddingLeft="3dp"
+            android:layout_row="8"
+            android:layout_columnSpan="5"
+            android:layout_column="0" />
+
         <Button android:id="@+id/add_passenger"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -102,7 +157,7 @@
             android:layout_marginRight="1dp"
             android:layout_marginTop="15dp"
             android:layout_column="0"
-            android:layout_row="5"
+            android:layout_row="9"
             android:layout_columnSpan="5"
             android:text="@string/add_to_ride"
             style="@style/RideShareOption"/>
@@ -114,7 +169,7 @@
             android:layout_marginRight="1dp"
             android:layout_marginTop="15dp"
             android:layout_column="0"
-            android:layout_row="5"
+            android:layout_row="9"
             android:layout_columnSpan="5"
             android:layout_gravity="end"
             android:text="@string/rem_from_ride"
@@ -127,7 +182,7 @@
             android:layout_marginRight="1dp"
             android:layout_marginTop="15dp"
             android:layout_column="0"
-            android:layout_row="5"
+            android:layout_row="9"
             android:layout_columnSpan="5"
             android:layout_gravity="end"
             android:text="@string/rem_from_ride"

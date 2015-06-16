@@ -46,12 +46,13 @@ public class MyTripAdapter extends ArrayAdapter<Trip> {
             switch (trip.getStatus()){
                 case(0): status = "Not Accepted by Ride"; break;
                 case(1): status = "Approved by Ride"; break;
+                case(2): status = "Waiting For Rank"; break;
             }
         } else {
             switch (trip.getStatus()){
                 case(0): status = "Waiting for Passengers"; break;
                 case(1): status = "Full Ride"; break;
-                case(2): status = "Finished Ride"; break;
+                case(2): status = "Waiting For Rank"; break;
             }
         }
 

@@ -61,23 +61,12 @@ public class RideShareInstanceIDListenerService extends InstanceIDListenerServic
             AppResponse result = new AppResponse();
             try {
                 token = getToken();
-            } catch (IOException e) {
-                Log.e("TokenGrabber", "IOException", e);
-                return result;
-            }
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
-                    getApplicationContext());
-            String storedToken = prefs.getString("GCM_TOKEN", null);
-            if(storedToken != null && storedToken.equals(token)){
-                return null;
-            }
-            try {
                 json.put("id", userID);
                 json.put("gcmToken", token);
                 result.setArgs(token);
                 manager.updateUser(json, result);
-            } catch (JSONException e) {
-                Log.e("TokenGrabber", "JSONException", e);
+            } catch (IOException | JSONException e) {
+                Log.e("TokenGrabber", "IOException|JSONException", e);
             }
             return result;
         }
@@ -85,15 +74,9 @@ public class RideShareInstanceIDListenerService extends InstanceIDListenerServic
         @Override
         protected void onPostExecute(AppResponse appResponse) {
             super.onPostExecute(appResponse);
-            if(appResponse != null && (!appResponse.isValid() || appResponse.getStatus() != 200)){
+            if(!appResponse.isValid() || appResponse.getStatus() != 200){
                 Toast.makeText(getApplicationContext(), "Notification Registration Failed",
                         Toast.LENGTH_SHORT).show();
-            } else if(appResponse != null){
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(
-                        getApplicationContext());
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("GCM_TOKEN", appResponse.getArgs());
-                editor.apply();
             }
         }
     }

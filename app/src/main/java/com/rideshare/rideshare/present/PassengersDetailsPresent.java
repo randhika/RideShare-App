@@ -35,15 +35,15 @@ public class PassengersDetailsPresent {
     }
 
     public void removePassenger(Rider rider) {
-        new RemovePassenger().execute(rideID, rider.getRequest(), rider.getId());
+        new RemovePassenger().execute(rider.getRideID(), rider.getRequest(), rider.getId());
     }
 
     public void removeWaitingUser(Rider rider) {
-        new RemoveWaitingPassenger().execute(rideID, rider.getRequest(), rider.getId());
+        new RemoveWaitingPassenger().execute(rider.getRideID(), rider.getRequest(), rider.getId());
     }
 
     public void addPassenger(Rider rider) {
-        new AddPassenger().execute(rider.getId(), rideID, rider.getRequest());
+        new AddPassenger().execute(rider.getId(), rider.getRideID(), rider.getRequest());
     }
 
     private class RidersGrabber extends AsyncTask<String, Void, AppResponse> {
@@ -65,13 +65,28 @@ public class PassengersDetailsPresent {
             ArrayList<Rider> passengers = new ArrayList<>();
             ArrayList<Rider> waitingList = new ArrayList<>();
             try {
-                JSONArray waitingListJSON = result.getJSON().getJSONArray("waitingList");
-                JSONArray passengersJSON = result.getJSON().getJSONArray("passengers");
-                for(int i = 0; i < passengersJSON.length(); i++){
-                    passengers.add(Rider.fromJSON(passengersJSON.getJSONObject(i), 1));
-                }
-                for(int i = 0; i < waitingListJSON.length(); i++){
-                    waitingList.add(Rider.fromJSON(waitingListJSON.getJSONObject(i), 0));
+                JSONArray rides = result.getJSON().getJSONArray("rides");
+                for(int ind = 0; ind < rides.length(); ind++) {
+                    JSONObject ride = rides.getJSONObject(ind);
+                    String source = ride.getString("source");
+                    String destination = ride.getString("destination");
+                    String rideID = ride.getString("_id");
+                    JSONArray waitingListJSON = ride.getJSONArray("waitingList");
+                    JSONArray passengersJSON = ride.getJSONArray("passengers");
+                    for (int i = 0; i < passengersJSON.length(); i++) {
+                        Rider rider = Rider.fromJSON(passengersJSON.getJSONObject(i), 1);
+                        rider.setDestination(destination);
+                        rider.setSource(source);
+                        rider.setRideID(rideID);
+                        passengers.add(rider);
+                    }
+                    for (int i = 0; i < waitingListJSON.length(); i++) {
+                        Rider rider = Rider.fromJSON(waitingListJSON.getJSONObject(i), 0);
+                        rider.setDestination(destination);
+                        rider.setSource(source);
+                        rider.setRideID(rideID);
+                        waitingList.add(rider);
+                    }
                 }
             } catch (JSONException e) {
                 Log.e("RidersGrabber", "JSONException", e);

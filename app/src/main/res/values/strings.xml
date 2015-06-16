@@ -106,5 +106,7 @@
     <string name="add_to_ride">Add to Ride</string>
     <string name="passenger_rating">Passenger Rating</string>
     <string name="remove_from_ride">Remove From Ride</string>
+    <string name="rank">Rank</string>
+    <string name="has_big_bag">Has Big Bag</string>
 
 </resources>

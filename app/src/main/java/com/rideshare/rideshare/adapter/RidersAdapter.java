@@ -48,7 +48,13 @@ public class RidersAdapter extends ArrayAdapter<Rider> {
 
         ((TextView) convertView.findViewById(R.id.name)).setText(rider.getFullName());
         ((TextView) convertView.findViewById(R.id.phone)).setText(rider.getPhone());
+        ((TextView) convertView.findViewById(R.id.source)).setText(rider.getSource());
+        ((TextView) convertView.findViewById(R.id.destination)).setText(rider.getDestination());
         ((RatingBar) convertView.findViewById(R.id.rating)).setNumStars(rider.getRating());
+
+        if(rider.getBags() != 2){
+            convertView.findViewById(R.id.bags_rider).setVisibility(View.INVISIBLE);
+        }
 
         (convertView.findViewById(R.id.add_passenger)).setOnClickListener(
                 new View.OnClickListener() {

@@ -161,6 +161,12 @@
         <item name="android:progressDrawable">@drawable/star_full</item>
         <item name="android:minHeight">15dip</item>
         <item name="android:maxHeight">15dip</item>
+    </style>RideShareRatingBarBig
+
+    <style name="RideShareRatingBarBig" parent="RideShareRatingBar">
+        <item name="android:progressDrawable">@drawable/star_full_big</item>
+        <item name="android:minHeight">24dip</item>
+        <item name="android:maxHeight">24dip</item>
     </style>
 
 </resources>

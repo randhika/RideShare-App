@@ -103,11 +103,17 @@ public class MyRidesFragment extends ListFragment {
                 case(1): updateRequest(info.position); break;
                 case(2): viewSuggestions(info.position); break;
                 case(3): viewConnectedRides(info.position); break;
+                case(4): rankPassengers(info.position); break;
                 case(5): viewConnectedRides(info.position); break;
+                case(6): deleteRequest(info.position); break;
             }
         } else if(item.getGroupId() == 2){
             switch(item.getOrder()){
-                case(1): viewRiders(info.position); break;
+                case(1): viewRiders(info.position);
+                    break;
+                case(2): rankRide(info.position);
+                    break;
+                case(3): deleteRide(info.position); break;
             }
         }
         return false;
@@ -120,10 +126,10 @@ public class MyRidesFragment extends ListFragment {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         Trip trip = trips.get(info.position);
         if(trip.getType().equals("request")){
-            menu.add(1, v.getId(), 1, "Update Request");
             switch (trip.getStatus()){
                 case(0): menu.add(1, v.getId(), 2, "View Suggestions");
                     menu.add(1, v.getId(), 5, "View Waiting to Approved Rides");
+                    menu.add(1, v.getId(), 1, "Update Request");
                     menu.add(1, v.getId(), 6, "Delete Request"); break;
                 case(1): menu.add(1, v.getId(), 3, "View Approved Ride");
                     menu.add(1, v.getId(), 6, "Delete Request"); break;
@@ -132,10 +138,10 @@ public class MyRidesFragment extends ListFragment {
         } else {
             switch (trip.getStatus()){
                 case(0): menu.add(2, v.getId(), 1, "See Passengers Details");
-                    menu.add(2, v.getId(), 4, "Delete Ride"); break;
+                    menu.add(2, v.getId(), 3, "Delete Ride"); break;
                 case(1): menu.add(2, v.getId(), 1, "See Passengers Details");
-                    menu.add(2, v.getId(), 4, "Delete Ride"); break;
-                case(2): menu.add(2, v.getId(), 3, "Rank Passengers"); break;
+                    menu.add(2, v.getId(), 3, "Delete Ride"); break;
+                case(2): menu.add(2, v.getId(), 2, "Rank Passengers"); break;
             }
         }
     }
@@ -174,5 +180,34 @@ public class MyRidesFragment extends ListFragment {
         bundle.putString("USER_ID", USER_ID);
         bundle.putInt("REQUEST_STATUS", trip.getStatus());
         ((NavigationActivity) getActivity()).selectItem(13, bundle);
+    }
+
+    private void rankPassengers(int position){
+        Bundle bundle = new Bundle();
+        Trip trip = trips.get(position);
+        bundle.putString("RIDE_ID", trip.getId());
+        ((NavigationActivity) getActivity()).selectItem(14, bundle);
+    }
+
+    private void rankRide(int position){
+        Bundle bundle = new Bundle();
+        Trip trip = trips.get(position);
+        bundle.putString("REQUEST_ID", trip.getId());
+        ((NavigationActivity) getActivity()).selectItem(14, bundle);
+    }
+
+    private void deleteRide(int position) {
+        Trip trip = trips.get(position);
+        present.deleteRide(trip.getId());
+    }
+
+    private void deleteRequest(int position) {
+        Trip trip = trips.get(position);
+        present.deleteRequest(trip.getId(), USER_ID);
+    }
+
+    public void reload() {
+        trips.clear();
+        present.getTrips(USER_ID);
     }
 }

@@ -13,6 +13,8 @@
     <TextView
         android:id="@+id/noti_body"
         android:layout_width="match_parent"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
         android:layout_height="wrap_content"
         style="@style/RideShareTextSecondary"/>
 

@@ -19,6 +19,7 @@ import com.rideshare.rideshare.view.fragment.ConnectedRidesFragment;
 import com.rideshare.rideshare.view.fragment.MyRidesFragment;
 import com.rideshare.rideshare.view.fragment.NotificationFragment;
 import com.rideshare.rideshare.view.fragment.PassengersDetailsFragment;
+import com.rideshare.rideshare.view.fragment.RankFragment;
 import com.rideshare.rideshare.view.fragment.RequestFragment;
 import com.rideshare.rideshare.view.fragment.SuggestionFragment;
 import com.rideshare.rideshare.view.fragment.TripPlannerFragment;
@@ -93,6 +94,7 @@ public class NavigationActivity extends FragmentActivity {
                 case(11): setTitle("Suggestions"); break;
                 case(12): setTitle("Passengers Details"); break;
                 case(13): setTitle("Connected Rides"); break;
+                case(14): setTitle("Rank"); break;
             }
         }
         drawerLayout.closeDrawer(drawerList);
@@ -103,6 +105,10 @@ public class NavigationActivity extends FragmentActivity {
         fragmentManager.beginTransaction()
                 .replace(R.id.body, fragment)
                 .commit();
+    }
+
+    public String getUserID() {
+        return USER_ID;
     }
 
     private Fragment getFragmentAtPosition(int position, Bundle args){
@@ -121,6 +127,8 @@ public class NavigationActivity extends FragmentActivity {
                 return PassengersDetailsFragment.newInstance(args);
             case 13:
                 return ConnectedRidesFragment.newInstance(args);
+            case 14:
+                return RankFragment.newInstance(args);
         }
         // Default value should never come to this point
         return NotificationFragment.newInstance(args);

@@ -13,6 +13,8 @@ public class TripManager extends Manager {
     private final static String GET_RIDERS = "ride/riders";
     private final static String PASSENGER_LIST = "ride/approve";
     private final static String CONNECTED_RIDES = "request/rides";
+    private final static String RANK_RIDE = "rank/request";
+    private final static String RANK_REQUEST = "rank/ride";
 
     public TripManager(){
         super();
@@ -39,7 +41,7 @@ public class TripManager extends Manager {
     }
 
     public void getSuggestions(String requestID, AppResponse appResponse){
-        String url = buildUrl(GET_SUGGESTIONS) + "?request=" + "556946a61fcc8703003960f4";
+        String url = buildUrl(GET_SUGGESTIONS) + "?request=" + requestID;
         httpHandler.getJSON(url, appResponse);
     }
 
@@ -67,10 +69,6 @@ public class TripManager extends Manager {
         httpHandler.deleteJSON(url, appResponse);
     }
 
-    private String buildUrl(String path){
-        return super.buildUrl(APPLICATION_URL, path);
-    }
-
     public void removeFromWaitingList(String rideID, String requestID, String userID,
                                      AppResponse appResponse) {
         String url = buildUrl(WAITING_LIST);
@@ -83,5 +81,34 @@ public class TripManager extends Manager {
     public void getConnectedRides(String user, AppResponse appResponse) {
         String url = buildUrl(CONNECTED_RIDES) + "?user=" + user;
         httpHandler.getJSON(url, appResponse);
+    }
+
+    public void getRideByRequest(String requestID, AppResponse appResponse) {
+        String url = buildUrl(RIDE_URI) + "?request=" + requestID;
+        httpHandler.getJSON(url, appResponse);
+    }
+
+    private String buildUrl(String path){
+        return super.buildUrl(APPLICATION_URL, path);
+    }
+
+    public void rankRide(JSONObject json, AppResponse appResponse) {
+        String url = buildUrl(RANK_RIDE);
+        httpHandler.putJSON(json, url, appResponse);
+    }
+
+    public void rankRequest(JSONObject json, AppResponse appResponse) {
+        String url = buildUrl(RANK_REQUEST);
+        httpHandler.putJSON(json, url, appResponse);
+    }
+
+    public void deleteRide(String rideID, AppResponse appResponse) {
+        String url = buildUrl(RIDE_URI) + "?id=" + rideID;
+        httpHandler.deleteJSON(url, appResponse);
+    }
+
+    public void deleteRequest(String requestID, String userID, AppResponse appResponse) {
+        String url = buildUrl(REQUEST_URI) + "?id=" + requestID + "&user=" + userID;
+        httpHandler.deleteJSON(url, appResponse);
     }
 }
