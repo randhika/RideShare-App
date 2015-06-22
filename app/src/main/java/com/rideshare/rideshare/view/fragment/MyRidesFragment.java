@@ -210,4 +210,8 @@ public class MyRidesFragment extends ListFragment {
         trips.clear();
         present.getTrips(USER_ID);
     }
+
+    public void clear() {
+        trips.clear();
+    }
 }

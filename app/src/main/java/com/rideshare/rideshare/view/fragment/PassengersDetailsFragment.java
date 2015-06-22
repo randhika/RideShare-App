@@ -59,4 +59,8 @@ public class PassengersDetailsFragment extends ListFragment {
         this.riders.addAll(waitingList);
         adapter.notifyDataSetChanged();
     }
+
+    public void clear() {
+        riders.clear();
+    }
 }

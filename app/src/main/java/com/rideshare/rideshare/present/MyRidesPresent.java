@@ -80,6 +80,7 @@ public class MyRidesPresent {
         @Override
         protected AppResponse doInBackground(String... params) {
             AppResponse appResponse = new AppResponse();
+            parent.clear();
             manager.getMyRides(params[0], appResponse);
             return appResponse;
         }

@@ -65,6 +65,10 @@ public class ConnectedRidesFragment extends ListFragment {
         adapter.notifyDataSetChanged();
     }
 
+    public void clear(){
+        this.rides.clear();
+    }
+
     public void reload(String rideID) {
         for(Suggestion s : rides){
             if(s.getRideID().equals(rideID)){

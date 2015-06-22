@@ -102,9 +102,20 @@ public class NavigationActivity extends FragmentActivity {
 
     private void displayFragment(Fragment fragment){
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.body, fragment)
-                .commit();
+        fragmentManager.beginTransaction().replace(R.id.body, fragment)
+                .addToBackStack(getFragmentTitle()).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getFragmentManager();
+        int count = fragmentManager.getBackStackEntryCount();
+        if (count > 0 ){
+            setTitle(fragmentManager.getBackStackEntryAt(count - 1).getName());
+            fragmentManager.popBackStackImmediate();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     public String getUserID() {
@@ -137,6 +148,10 @@ public class NavigationActivity extends FragmentActivity {
     @Override
     public void setTitle(CharSequence title) {
         ((TextView) findViewById(R.id.header)).setText(title);
+    }
+
+    public String getFragmentTitle() {
+        return ((TextView) findViewById(R.id.header)).getText().toString();
     }
 
     @Override

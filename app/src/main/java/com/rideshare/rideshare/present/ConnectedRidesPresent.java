@@ -88,6 +88,7 @@ public class ConnectedRidesPresent {
         @Override
         protected AppResponse doInBackground(String... params) {
             AppResponse appResponse = new AppResponse();
+            parent.clear();
             tripManager.getConnectedRides(params[0], appResponse);
             return appResponse;
         }

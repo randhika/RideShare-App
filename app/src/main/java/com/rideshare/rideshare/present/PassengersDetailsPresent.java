@@ -53,6 +53,7 @@ public class PassengersDetailsPresent {
         @Override
         protected AppResponse doInBackground(String... params) {
             AppResponse appResponse = new AppResponse();
+            parent.clear();
             tripManager.getRiders(params[0], appResponse);
             return appResponse;
         }

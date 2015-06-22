@@ -76,6 +76,7 @@ public class NotificationPresent {
         @Override
         protected AppResponse doInBackground(String... params) {
             AppResponse appResponse = new AppResponse();
+            parent.clear();
             idManager.getNotifications(params[0], null, null, appResponse);
             return appResponse;
         }

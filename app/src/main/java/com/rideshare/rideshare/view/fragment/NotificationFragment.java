@@ -76,4 +76,8 @@ public class NotificationFragment extends ListFragment {
         this.notifications.addAll(notifications);
         adapter.notifyDataSetChanged();
     }
+
+    public void clear() {
+        notifications.clear();
+    }
 }
