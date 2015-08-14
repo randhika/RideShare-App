@@ -81,8 +81,6 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         postRideBtn.setOnClickListener(this);
         Button postRequestBtn = (Button) view.findViewById(R.id.post_request);
         postRequestBtn.setOnClickListener(this);
-        Button searchBtn = (Button) view.findViewById(R.id.manual_search);
-        searchBtn.setOnClickListener(this);
         EditText date = (EditText) view.findViewById(R.id.date);
         date.setOnClickListener(this);
         EditText tf = (EditText) view.findViewById(R.id.time_from);
@@ -264,7 +262,6 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         showView(getActivity().findViewById(R.id.passengers));
         showView(getActivity().findViewById(R.id.post_ride));
         hideView(getActivity().findViewById(R.id.post_request));
-        hideView(getActivity().findViewById(R.id.manual_search));
         hideView(getActivity().findViewById(R.id.bag));
         showView(getListView());
     }
@@ -281,7 +278,6 @@ public class TripPlannerFragment extends ListFragment implements View.OnClickLis
         hideView(getActivity().findViewById(R.id.passengers));
         hideView(getActivity().findViewById(R.id.post_ride));
         showView(getActivity().findViewById(R.id.post_request));
-        showView(getActivity().findViewById(R.id.manual_search));
         showView(getActivity().findViewById(R.id.bag));
         hideView(getListView());
     }
